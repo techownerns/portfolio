@@ -226,6 +226,22 @@ section{position:relative;overflow:hidden;padding:74px 0;border-top:1px solid rg
 .cb span{font-size:11.5px;color:var(--muted);margin-top:2px;display:block}
 .roadmap{margin-top:22px;text-align:center;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
 .roadmap b{color:#c7cbff;font-weight:700}.roadmap i{color:var(--accent2);font-size:18px}
+.lp-title{position:relative;z-index:1;margin-top:26px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a5b4fc;display:flex;align-items:center;gap:8px}
+.lp-title i{font-size:15px;color:#67e8f9}
+.loop{position:relative;z-index:1;margin-top:14px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.loop .lstep{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:16px 14px;transition:transform .3s,background .3s,box-shadow .3s,border-color .3s}
+.loop .lstep.active{background:linear-gradient(135deg,rgba(109,94,252,.45),rgba(34,211,238,.32));border-color:rgba(34,211,238,.55);box-shadow:0 0 28px -4px rgba(34,211,238,.65);transform:translateY(-5px)}
+.loop .li{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px;color:#fff;background:linear-gradient(135deg,#6366f1,#22d3ee);margin-bottom:11px}
+.loop .ln{font-size:15px;font-weight:800;color:#fff}
+.loop .ln em{font-style:normal;font-size:11px;font-weight:600;color:#9aa3d8;margin-left:6px;letter-spacing:.05em}
+.loop .ld{font-size:12.5px;color:#c2c7e6;margin-top:6px;line-height:1.55}
+.loop .lar{display:flex;align-items:center;justify-content:center;color:#67e8f9;font-size:18px}
+@media(max-width:760px){.loop{grid-template-columns:1fr}.loop .lar{transform:rotate(90deg);padding:1px 0}}
+.systems{position:relative;z-index:1;margin-top:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:760px){.systems{grid-template-columns:repeat(2,1fr)}}
+.sys{display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:13px;padding:16px 8px;font-size:12.5px;font-weight:700;color:#dfe3f5;transition:transform .2s,background .2s}
+.sys i{font-size:23px;color:#a5f3fc}
+.sys:hover{background:rgba(255,255,255,.13);transform:translateY(-4px)}
 
 footer{position:relative;overflow:hidden;color:#cdd3e6;padding:84px 0 64px;text-align:center;border-top:1px solid var(--bd);background:rgba(0,0,0,.3)}
 footer .q{font-size:21px;font-weight:500;color:#fff;max-width:720px;margin:0 auto;letter-spacing:-.01em;line-height:1.65}
@@ -422,33 +438,30 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
       <div class="field" data-field="8" data-op=".16"></div>
       <span class="proj-badge"><i class="ti ti-robot"></i>AI OPERATIONS AGENT</span>
       <h3>프랜차이즈 · 지점운영 자동화 AI 운영 에이전트</h3>
-      <p class="desc">다지점 · 프랜차이즈 운영의 전 과정 — 문의 접수부터 상담 · 결제 · 정산 · 근태 · 본사 리포트까지 — 을
-      AI 에이전트가 24시간 감지·판단해 각 지점 직원에게 업무를 자동 배정하고 완료까지 확인합니다.
-      본사 · 지점 · CRM · 모바일 · 게이트웨이를 아우르는 멀티앱 SaaS + AI 에이전트를 단일 모노레포로 혼자 설계 · 개발 · 배포 · 운영 중입니다.</p>
-      <div class="flow" id="flow">
-        <div class="step ai"><i class="ti ti-phone"></i>문의·통화·문자 자동수집</div>
-        <div class="step ai"><i class="ti ti-user-plus"></i>STT 분석 · 고객/리드 자동등록</div>
-        <div class="step ai"><i class="ti ti-clipboard-check"></i>AI 업무 자동배정</div>
-        <div class="step"><i class="ti ti-message-2"></i>상담 · 콜백 · 알림톡</div>
-        <div class="step"><i class="ti ti-credit-card"></i>결제 · 정산 · 환불</div>
-        <div class="step"><i class="ti ti-face-id"></i>출입 · 근태 (얼굴인식)</div>
-        <div class="step ai"><i class="ti ti-alert-triangle"></i>이상 감지 · 업무 발행</div>
-        <div class="step ai"><i class="ti ti-robot"></i>AI 매니저 · 자동 응대</div>
-        <div class="step"><i class="ti ti-building"></i>본사 통합 관제</div>
-        <div class="step ai"><i class="ti ti-report"></i>야간 경영 리포트</div>
-      </div>
+      <p class="desc">다지점 · 프랜차이즈 운영의 전 과정을 AI 에이전트가 24시간 자동 오케스트레이션하는 멀티앱 SaaS. 본사 · 지점 · CRM · 모바일 · 출입 게이트웨이를 단일 모노레포로 직접 설계 · 개발 · 배포 · 운영합니다.</p>
       <div class="stats">
         <div class="stat"><i class="ti ti-database"></i><b data-count="110" data-suffix="+">0</b><span>DB 테이블 · RLS 멀티테넌트</span></div>
         <div class="stat"><i class="ti ti-file-code"></i><b data-count="980" data-suffix="+">0</b><span>소스 파일</span></div>
         <div class="stat"><i class="ti ti-git-commit"></i><b data-count="1592">0</b><span>커밋</span></div>
         <div class="stat"><i class="ti ti-clock-bolt"></i><b>1개월</b><span>1인 단독 개발</span></div>
       </div>
-      <div class="feat">
-        <span><i class="ti ti-robot"></i>AI 운영 에이전트</span><span><i class="ti ti-phone"></i>업무폰 수집(통화·문자)</span>
-        <span><i class="ti ti-users"></i>지점 CRM · 상담</span><span><i class="ti ti-clipboard-check"></i>지점 운영 · 근태</span>
-        <span><i class="ti ti-building"></i>본사 통합 관제(전 지점)</span><span><i class="ti ti-device-mobile"></i>고객 · 직원 모바일 앱</span>
-        <span><i class="ti ti-face-id"></i>얼굴인식 출입</span><span><i class="ti ti-bell"></i>4채널 자동 알림</span>
-        <span><i class="ti ti-credit-card"></i>결제 · 정산 · 환불</span><span><i class="ti ti-cloud"></i>클라우드 실배포</span>
+      <div class="lp-title"><i class="ti ti-refresh"></i>AI 운영 루프 · Autonomous Loop</div>
+      <div class="loop" id="loop">
+        <div class="lstep"><span class="li"><i class="ti ti-radar-2"></i></span><div class="ln">감지<em>Sense</em></div><div class="ld">통화 · 문자 · 출입 · 결제 등 현장 신호를 24시간 수집</div></div>
+        <div class="lar"><i class="ti ti-arrow-right"></i></div>
+        <div class="lstep"><span class="li"><i class="ti ti-brain"></i></span><div class="ln">판단<em>Decide</em></div><div class="ld">STT · 분석으로 상황을 해석하고 처리 우선순위 결정</div></div>
+        <div class="lar"><i class="ti ti-arrow-right"></i></div>
+        <div class="lstep"><span class="li"><i class="ti ti-send"></i></span><div class="ln">실행<em>Act</em></div><div class="ld">직원 업무 자동 배정 · 알림톡 · 경영 리포트 발송</div></div>
+        <div class="lar"><i class="ti ti-arrow-right"></i></div>
+        <div class="lstep"><span class="li"><i class="ti ti-checks"></i></span><div class="ln">검증<em>Verify</em></div><div class="ld">완료 추적 · 미처리 자동 에스컬레이션으로 운영 마감</div></div>
+      </div>
+      <div class="lp-title"><i class="ti ti-stack-2"></i>시스템 구성 · 멀티앱 SaaS</div>
+      <div class="systems">
+        <div class="sys"><i class="ti ti-building-skyscraper"></i>본사 통합 관제</div>
+        <div class="sys"><i class="ti ti-clipboard-check"></i>지점 운영 · 근태</div>
+        <div class="sys"><i class="ti ti-users"></i>CRM · 상담</div>
+        <div class="sys"><i class="ti ti-device-mobile"></i>고객 · 직원 모바일</div>
+        <div class="sys"><i class="ti ti-face-id"></i>출입 게이트웨이</div>
       </div>
     </div></div>
 
@@ -597,7 +610,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
 
   function cycle(sel,ms){var els=document.querySelectorAll(sel);if(!els.length||RM)return;var k=0;
     setInterval(function(){els.forEach(function(s){s.classList.remove('active');});els[k].classList.add('active');k=(k+1)%els.length;},ms);}
-  cycle('#flow .step',900);cycle('#vchain .vnode',1100);
+  cycle('#loop .lstep',1100);cycle('#vchain .vnode',1100);
 
   var prog=document.getElementById('prog');
   function onScroll(){var h=document.documentElement;var d=h.scrollHeight-h.clientHeight;prog.style.width=(d>0?(h.scrollTop/d*100):0)+'%';}
