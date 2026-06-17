@@ -58,8 +58,9 @@ header.hero{position:relative;overflow:hidden;color:#fff;padding:104px 0 112px;
   background:linear-gradient(120deg,#1e1b4b,#3730a3,#0e7490,#1e1b4b);background-size:300% 300%;animation:gradientShift 18s ease infinite}
 #net{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55}
 .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;pointer-events:none;z-index:0;will-change:transform}
-.blob.b1{width:440px;height:440px;top:-130px;right:-70px;background:#22d3ee;animation:floatBlob 14s ease-in-out infinite}
-.blob.b2{width:380px;height:380px;bottom:-160px;left:-90px;background:#7c3aed;animation:floatBlob2 17s ease-in-out infinite}
+.blob.b1{width:440px;height:440px;top:-130px;right:-70px;background:#38bdf8;animation:floatBlob 14s ease-in-out infinite}
+.blob.b2{width:380px;height:380px;bottom:-160px;left:-90px;background:#a855f7;animation:floatBlob2 17s ease-in-out infinite}
+.blob.b3{width:320px;height:320px;top:28%;left:36%;background:#ec4899;opacity:.34;animation:floatBlob 21s ease-in-out infinite}
 .orbit{position:absolute;left:50%;top:50%;width:560px;height:560px;margin:-280px 0 0 -280px;z-index:0;opacity:.18;animation:spin 46s linear infinite;pointer-events:none}
 .orbit .ring{position:absolute;inset:0;border:1px solid rgba(255,255,255,.25);border-radius:50%}
 .orbit .ring.r2{inset:78px}
@@ -168,6 +169,26 @@ footer .q{font-size:21px;font-weight:500;color:#fff;max-width:700px;margin:0 aut
 footer .cta{margin-top:26px;font-size:14px;letter-spacing:.16em;color:#9aa3c4;display:inline-flex;align-items:center;gap:10px}
 footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
 
+.cardicon.ic1{background:linear-gradient(135deg,#6366f1,#a855f7)}
+.cardicon.ic2{background:linear-gradient(135deg,#38bdf8,#6366f1)}
+.cardicon.ic3{background:linear-gradient(135deg,#a855f7,#ec4899)}
+.cardicon.ic4{background:linear-gradient(135deg,#10b981,#38bdf8)}
+.cardicon.ic5{background:linear-gradient(135deg,#f59e0b,#ec4899)}
+.cardicon.ic6{background:linear-gradient(135deg,#ec4899,#a855f7)}
+.dom-card .di.di1{background:linear-gradient(135deg,#f59e0b,#ec4899)}
+.dom-card .di.di2{background:linear-gradient(135deg,#a855f7,#6366f1)}
+.dom-card .di.di3{background:linear-gradient(135deg,#10b981,#38bdf8)}
+.dom-card .di.di4{background:linear-gradient(135deg,#ec4899,#a855f7)}
+.proj-badge{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.12em;color:#e9d5ff;background:rgba(168,85,247,.22);border:1px solid rgba(168,85,247,.45);padding:5px 11px;border-radius:999px;margin-bottom:14px;position:relative;z-index:1}
+.flow{position:relative;z-index:1;margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow .step{display:inline-flex;align-items:center;gap:7px;font-size:13px;padding:8px 13px;border-radius:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);transition:transform .3s,background .3s,box-shadow .3s}
+.flow .step i{font-size:15px;color:#a5f3fc}
+.flow .step.ai{border-color:rgba(216,180,254,.5)}
+.flow .step.ai i{color:#e9d5ff}
+.flow .step.active{background:rgba(255,255,255,.26);transform:translateY(-3px) scale(1.05);box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
+.flow .step.ai.active{background:rgba(168,85,247,.34);box-shadow:0 0 24px -2px rgba(168,85,247,.75)}
+.roadmap{margin-top:20px;text-align:center;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.roadmap b{color:var(--accent);font-weight:700}.roadmap i{color:var(--accent2);font-size:18px}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}.fi{opacity:var(--op,.18)}.hero h1{color:#fff}
@@ -190,7 +211,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
 
 <header class="hero">
   <canvas id="net"></canvas>
-  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
   <div class="orbit" id="orbit"><div class="ring"></div><div class="ring r2"></div></div>
   <div class="field" id="heroField"></div>
   <div class="wrap">
@@ -230,7 +251,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
     <div class="head reveal"><h2>Core Capabilities</h2><p>핵심 역량</p></div>
     <div class="grid" data-stagger>
       <div class="card reveal">
-        <div class="cardtop"><span class="cardicon"><i class="ti ti-rocket"></i></span><span class="no">01</span></div>
+        <div class="cardtop"><span class="cardicon ic1"><i class="ti ti-rocket"></i></span><span class="no">01</span></div>
         <h3>사업 전략 · Zero to One</h3>
         <ul>
           <li>아이디어 → GTM → 제품화 → 운영 → 수익화까지 밸류체인 전 구간 단독 리드</li>
@@ -241,7 +262,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
         </ul>
       </div>
       <div class="card reveal">
-        <div class="cardtop"><span class="cardicon"><i class="ti ti-layout-kanban"></i></span><span class="no">02</span></div>
+        <div class="cardtop"><span class="cardicon ic2"><i class="ti ti-layout-kanban"></i></span><span class="no">02</span></div>
         <h3>프로덕트 기획 · PO / PM</h3>
         <ul>
           <li>기획 ~ 디자인 ~ 퍼블리싱 ~ 개발 ~ QA 전 과정 관리 체계 수립</li>
@@ -252,7 +273,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
         </ul>
       </div>
       <div class="card reveal">
-        <div class="cardtop"><span class="cardicon"><i class="ti ti-brain"></i></span><span class="no">03</span></div>
+        <div class="cardtop"><span class="cardicon ic3"><i class="ti ti-brain"></i></span><span class="no">03</span></div>
         <h3>AI 상용화 (AI Productization)</h3>
         <ul>
           <li>AI 기반 엔터프라이즈 솔루션 기획 및 상용화</li>
@@ -263,7 +284,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
         </ul>
       </div>
       <div class="card reveal">
-        <div class="cardtop"><span class="cardicon"><i class="ti ti-code"></i></span><span class="no">04</span></div>
+        <div class="cardtop"><span class="cardicon ic4"><i class="ti ti-code"></i></span><span class="no">04</span></div>
         <h3>풀스택 개발 · 시스템 엔지니어링</h3>
         <ul>
           <li>기획에서 멈추지 않고 직접 구현 · 배포 · 운영</li>
@@ -274,7 +295,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
         </ul>
       </div>
       <div class="card reveal">
-        <div class="cardtop"><span class="cardicon"><i class="ti ti-world"></i></span><span class="no">05</span></div>
+        <div class="cardtop"><span class="cardicon ic5"><i class="ti ti-world"></i></span><span class="no">05</span></div>
         <h3>도메인 전문성</h3>
         <ul>
           <li>FinTech / 회계 · 세무 · 경비 · 전자세금계산서</li>
@@ -285,7 +306,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
         </ul>
       </div>
       <div class="card reveal">
-        <div class="cardtop"><span class="cardicon"><i class="ti ti-businessplan"></i></span><span class="no">06</span></div>
+        <div class="cardtop"><span class="cardicon ic6"><i class="ti ti-businessplan"></i></span><span class="no">06</span></div>
         <h3>사업개발 · 제휴 · 커뮤니케이션</h3>
         <ul>
           <li>대기업 · 금융기관 · 공공기관 초기 영업 및 사업 제안, RFP 대응</li>
@@ -319,12 +340,28 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
 <section id="recent">
   <div class="field" data-field="6" data-op=".06"></div>
   <div class="wrap">
-    <div class="head reveal"><h2>Recent Work</h2><p>최근 프로젝트</p></div>
+    <div class="head reveal"><h2>Recent Work</h2><p>최근 프로젝트 · AI 운영 에이전트 SaaS</p></div>
     <div class="proj reveal">
       <div class="field" data-field="8" data-op=".14"></div>
-      <h3>멀티테넌트 관리 SaaS — 직접 설계 · 개발 · 배포 · 운영</h3>
-      <p class="desc">본사 · 지점 · 사용자 · 출입통제까지 아우르는 멀티테넌트 SaaS를 단일 모노레포로
-      혼자 설계하고 상용 운영 중입니다. AI를 레버리지해 통상 2년 · 20억 규모의 개발을 1개월 만에 단독 완성했습니다.</p>
+      <span class="proj-badge"><i class="ti ti-robot"></i>AI OPERATIONS AGENT</span>
+      <h3>학원·독서실 운영을 자동화하는 AI 운영 에이전트 SaaS</h3>
+      <p class="desc">문의 접수부터 상담 · 출결 · 결제 · 학부모 리포트까지 운영 전 과정을, AI 에이전트가 24시간 감지·판단해
+      직원에게 업무를 자동 배정하고 완료까지 확인합니다. 상담·출결·결제·모바일을 아우르는 5개 서비스 + AI 에이전트를
+      단일 모노레포로 혼자 설계 · 개발 · 배포 · 운영 중입니다. (통상 2년 · 20억 규모의 개발을 1개월 만에 단독 완성)</p>
+
+      <div class="flow" id="flow">
+        <div class="step ai"><i class="ti ti-phone"></i>통화·문자 자동수집</div>
+        <div class="step ai"><i class="ti ti-user-plus"></i>STT 분석 · 고객 자동등록</div>
+        <div class="step ai"><i class="ti ti-clipboard-check"></i>AI 업무 자동배정</div>
+        <div class="step"><i class="ti ti-message-2"></i>상담 · 콜백 · 알림톡</div>
+        <div class="step"><i class="ti ti-credit-card"></i>결제 · 좌석 배정</div>
+        <div class="step"><i class="ti ti-face-id"></i>얼굴인식 출결 · 실시간 재원</div>
+        <div class="step ai"><i class="ti ti-alert-triangle"></i>미출석 감지 · 업무 발행</div>
+        <div class="step ai"><i class="ti ti-robot"></i>AI 매니저 · 문제풀이</div>
+        <div class="step"><i class="ti ti-building"></i>본사 통합 관제</div>
+        <div class="step ai"><i class="ti ti-report"></i>야간 학부모 리포트</div>
+      </div>
+
       <div class="stats">
         <div class="stat"><i class="ti ti-apps"></i><b data-count="7">0</b><span>앱 + 공유 패키지 4</span></div>
         <div class="stat"><i class="ti ti-database"></i><b data-count="88">0</b><span>DB 테이블 · RLS 90 정책</span></div>
@@ -332,13 +369,14 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
         <div class="stat"><i class="ti ti-git-commit"></i><b data-count="1500" data-suffix="+">0</b><span>커밋</span></div>
       </div>
       <div class="feat">
-        <span><i class="ti ti-building"></i>본사 관리</span><span><i class="ti ti-building-store"></i>지점 운영</span>
-        <span><i class="ti ti-users"></i>지점 CRM</span><span><i class="ti ti-device-mobile"></i>사용자 앱</span>
-        <span><i class="ti ti-server-2"></i>모바일 백엔드</span><span><i class="ti ti-face-id"></i>출입통제 게이트웨이</span>
-        <span><i class="ti ti-device-mobile-code"></i>업무폰 Android</span><span><i class="ti ti-credit-card"></i>결제 · 메시징 · 푸시</span>
-        <span><i class="ti ti-brain"></i>AI 통합</span><span><i class="ti ti-cloud"></i>클라우드 실배포</span>
+        <span><i class="ti ti-robot"></i>AI 운영 에이전트</span><span><i class="ti ti-phone"></i>업무폰 수집(통화·문자)</span>
+        <span><i class="ti ti-users"></i>지점 CRM · 상담</span><span><i class="ti ti-clipboard-check"></i>지점 운영 · 출결</span>
+        <span><i class="ti ti-building"></i>본사 통합 관제</span><span><i class="ti ti-device-mobile"></i>학생 · 학부모 앱</span>
+        <span><i class="ti ti-face-id"></i>얼굴인식 출결</span><span><i class="ti ti-bell"></i>4채널 자동 알림</span>
+        <span><i class="ti ti-credit-card"></i>결제 · 좌석 · 환불</span><span><i class="ti ti-cloud"></i>클라우드 실배포</span>
       </div>
     </div>
+    <p class="roadmap reveal"><i class="ti ti-trending-up"></i>운영 자동화에서 <b>경영 자동화</b>로 — 데이터가 쌓일수록 AI 예측 · 경영 인텔리전스가 강해지는 선순환으로 확장</p>
   </div>
 </section>
 
@@ -410,10 +448,10 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
   <div class="wrap">
     <div class="head reveal"><h2>Domain Expertise</h2><p>도메인 전문성</p></div>
     <div class="dom-grid" data-stagger>
-      <div class="dom-card reveal"><span class="di"><i class="ti ti-coin"></i></span><div><div class="t">FinTech</div><div class="d">회계 · 세무 · 경비 · 전자세금계산서 · 카드 · 은행</div></div></div>
-      <div class="dom-card reveal"><span class="di"><i class="ti ti-cpu"></i></span><div><div class="t">Enterprise AI</div><div class="d">기업 재무 · ERP / CRM / CMS / HRM 연계</div></div></div>
-      <div class="dom-card reveal"><span class="di"><i class="ti ti-school"></i></span><div><div class="t">EdTech</div><div class="d">LMS · CMS · 영상 지식공유 플랫폼</div></div></div>
-      <div class="dom-card reveal"><span class="di"><i class="ti ti-speakerphone"></i></span><div><div class="t">AdTech</div><div class="d">마케팅 백오피스 · 리타게팅 광고</div></div></div>
+      <div class="dom-card reveal"><span class="di di1"><i class="ti ti-coin"></i></span><div><div class="t">FinTech</div><div class="d">회계 · 세무 · 경비 · 전자세금계산서 · 카드 · 은행</div></div></div>
+      <div class="dom-card reveal"><span class="di di2"><i class="ti ti-cpu"></i></span><div><div class="t">Enterprise AI</div><div class="d">기업 재무 · ERP / CRM / CMS / HRM 연계</div></div></div>
+      <div class="dom-card reveal"><span class="di di3"><i class="ti ti-school"></i></span><div><div class="t">EdTech</div><div class="d">LMS · CMS · 영상 지식공유 플랫폼</div></div></div>
+      <div class="dom-card reveal"><span class="di di4"><i class="ti ti-speakerphone"></i></span><div><div class="t">AdTech</div><div class="d">마케팅 백오피스 · 리타게팅 광고</div></div></div>
     </div>
     <p class="dom-full reveal"><b>B2B · B2C · B2G</b> 와 <b>On-Premise · SaaS</b> 전 영역 경험</p>
   </div>
@@ -435,6 +473,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
     'chart-line','chart-bar','coin','businessplan','rocket','bolt','api','sparkles','target-arrow','bulb',
     'trending-up','stack-2','network','server','plug-connected'];
   function rnd(a,b){return a+Math.random()*(b-a);}
+  var PAL=['#818cf8','#34d399','#c084fc','#38bdf8','#fbbf24','#f472b6','#67e8f9'];
 
   function makeField(el,n,op){
     for(var i=0;i<n;i++){
@@ -445,6 +484,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
       s.style.setProperty('--d',rnd(8,17).toFixed(1)+'s');
       s.style.setProperty('--delay',rnd(0,3).toFixed(1)+'s');
       s.style.setProperty('--op',op);
+      s.style.color=PAL[Math.floor(Math.random()*PAL.length)];
       el.appendChild(s);
     }
   }
@@ -478,6 +518,9 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
       function type(){if(ci<=TXT.length){typed.innerHTML=TXT.slice(0,ci)+'<span class="cursor">&nbsp;</span>';ci++;setTimeout(type,38);}}
       setTimeout(type,1400);}
   }
+
+  var fsteps=document.querySelectorAll('#flow .step');
+  if(fsteps.length&&!RM){var fk=0;setInterval(function(){fsteps.forEach(function(s){s.classList.remove('active');});fsteps[fk].classList.add('active');fk=(fk+1)%fsteps.length;},900);}
 
   var prog=document.getElementById('prog');
   function onScroll(){var h=document.documentElement;var d=h.scrollHeight-h.clientHeight;
@@ -516,7 +559,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
   if(c&&c.getContext){var x=c.getContext('2d'),W,H,pts,mouse={x:-999,y:-999};
     function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
     function init(){size();pts=[];var n=Math.min(80,Math.floor(W*H/16000));
-      for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5});}
+      for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,col:PAL[Math.floor(Math.random()*PAL.length)]});}
     function frame(){x.clearRect(0,0,W,H);
       for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;
         if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
@@ -527,7 +570,7 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite}
       for(i=0;i<pts.length;i++){var q=pts[i];var md=Math.hypot(q.x-mouse.x,q.y-mouse.y);
         if(md<170){x.strokeStyle='rgba(103,232,249,'+(1-md/170)*.6+')';x.lineWidth=1;
           x.beginPath();x.moveTo(q.x,q.y);x.lineTo(mouse.x,mouse.y);x.stroke();}
-        x.fillStyle='rgba(185,210,255,.9)';x.beginPath();x.arc(q.x,q.y,1.7,0,6.3);x.fill();}
+        x.fillStyle=q.col;x.beginPath();x.arc(q.x,q.y,2,0,6.3);x.fill();}
       if(!RM)requestAnimationFrame(frame);}
     init();
     if(hero)hero.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
