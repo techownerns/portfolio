@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trend 4 · Spatial 3D</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root{--bg:#070910;--fg:#eaf0ff;--muted:#90a0c8;--a1:#5b8cff;--a2:#36e6ff;--line:rgba(255,255,255,.1);--maxw:1120px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard",system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px;word-break:keep-all;overflow-x:hidden;position:relative}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 50% -10%,rgba(91,140,255,.22),transparent 60%),radial-gradient(50% 50% at 80% 100%,rgba(54,230,255,.14),transparent 60%)}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(70% 60% at 50% 30%,#000,transparent 80%)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px;position:relative;z-index:2}
+a{color:inherit;text-decoration:none}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+.sbar{position:sticky;top:0;z-index:30;background:rgba(7,9,16,.6);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.sbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.sbar .nm{font-size:12px;letter-spacing:.14em;font-weight:800;color:var(--a2)}
+.sbar a{font-size:12.5px;color:var(--muted);border:1px solid var(--line);padding:7px 14px;border-radius:999px}
+
+.hero{padding:80px 0 64px;text-align:center}
+.scene{perspective:1300px;perspective-origin:50% 36%}
+.stage{transform-style:preserve-3d;transition:transform .15s ease-out;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.lyr{transform:translateZ(var(--z,0))}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#bcd0ff;background:rgba(91,140,255,.12);border:1px solid rgba(91,140,255,.3);padding:7px 15px;border-radius:999px}
+.hero h1{margin:24px auto 0;font-size:clamp(34px,6vw,66px);font-weight:800;letter-spacing:-.03em;line-height:1.1;max-width:15ch;text-shadow:0 30px 60px rgba(0,0,0,.6)}
+.hero h1 .g{background:linear-gradient(120deg,#fff,#a9c2ff,#7cf0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{margin:22px auto 0;max-width:600px;font-size:16px;color:var(--muted)}
+.float{margin-top:46px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.fcard{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:18px 24px;backdrop-filter:blur(8px);text-align:center;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.fcard b{display:block;font-size:24px;font-weight:800;background:linear-gradient(120deg,#a9c2ff,#7cf0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fcard span{font-size:12px;color:var(--muted)}
+.hint{margin-top:22px;font-size:12px;letter-spacing:.16em;color:var(--muted)}
+
+section{padding:78px 0}
+.shead{text-align:center;margin-bottom:44px}
+.shead .k{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--a2)}
+.shead h2{margin-top:10px;font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;transform-style:preserve-3d}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.tc{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:28px 26px;transition:transform .2s ease-out,box-shadow .2s,border-color .2s;transform-style:preserve-3d}
+.tc:hover{border-color:rgba(124,240,255,.4);box-shadow:0 40px 80px -40px rgba(54,230,255,.5)}
+.tc .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:20px;font-weight:800;color:#070910;background:linear-gradient(135deg,var(--a1),var(--a2));margin-bottom:18px;transform:translateZ(30px)}
+.tc .r{font-size:21px;font-weight:800;transform:translateZ(18px)}
+.tc .rs{margin-top:3px;font-size:12.5px;color:var(--a2);font-weight:600;transform:translateZ(14px)}
+.tc ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:11px;transform:translateZ(8px)}
+.tc li{font-size:14px;color:var(--muted);padding-left:16px;position:relative}
+.tc li:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--a2)}
+
+.cta{margin:0 auto;text-align:center;border:1px solid var(--line);border-radius:24px;padding:70px 28px;background:radial-gradient(80% 120% at 50% 0%,rgba(91,140,255,.16),transparent 60%)}
+.cta p{font-size:clamp(22px,3.2vw,36px);font-weight:700;letter-spacing:-.02em;max-width:760px;margin:0 auto;line-height:1.45}
+.cta .by{margin-top:24px;font-size:12px;letter-spacing:.2em;color:var(--a2);font-weight:700}
+footer{padding:42px 0;border-top:1px solid var(--line);text-align:center;font-size:12px;letter-spacing:.14em;color:var(--muted)}
+
+@media(max-width:760px){.scene{perspective:none}.stage{transform:none!important}.tc .ic,.tc .r,.tc .rs,.tc ul{transform:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.stage{transform:none!important}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="sbar"><div class="wrap"><span class="nm">TREND 04 · SPATIAL 3D</span><a href="./" target="_blank">현재 라이브</a></div></div>
+
+<header class="hero"><div class="wrap scene">
+  <div class="stage" id="heroStage">
+    <div class="lyr" style="--z:50px"><span class="kick">Founder · Full-Stack · AI</span></div>
+    <div class="lyr" style="--z:80px"><h1>사업과 서비스를 기획하고,<br><span class="g">풀스택으로 직접 개발</span>합니다.</h1></div>
+    <div class="lyr" style="--z:40px"><p class="sub">아이디어부터 수익화까지 밸류체인 전 구간을 단독 리드 — 생성형 AI로 멀티앱 SaaS를 1인 개발로 상용 운영합니다.</p></div>
+    <div class="lyr float" style="--z:110px">
+      <div class="fcard"><b>4회</b><span>창업 · 엑싯</span></div>
+      <div class="fcard"><b>40+</b><span>IT 서비스</span></div>
+      <div class="fcard"><b>AI</b><span>Agent 상용화</span></div>
+      <div class="fcard"><b>100+</b><span>기업 제휴</span></div>
+      <div class="fcard"><b>VC</b><span>투자유치</span></div>
+    </div>
+  </div>
+  <div class="hint">마우스를 움직여 깊이를 느껴보세요</div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="shead rv"><div class="k">Leadership</div><h2>전략과 실행을 겸비한 리더십</h2></div>
+  <div class="cards" id="cards">
+    <div class="tc rv"><div class="ic">C</div><div class="r">CEO</div><div class="rs">대표이사 · 사업 총괄</div>
+      <ul><li>Enterprise AI 스타트업 · 200억 밸류</li><li>시니어 오프라인 커뮤니티 플랫폼</li><li>VC · 기관 투자유치 · P&amp;L 의사결정</li></ul></div>
+    <div class="tc rv"><div class="ic">P</div><div class="r">CPO</div><div class="rs">Product · 상품 총괄</div>
+      <ul><li>40여 개 IT 서비스 · 솔루션 출시</li><li>기획 ~ 디자인 ~ 개발 전 과정 PM/PO</li><li>VOC · 데이터 기반 의사결정</li></ul></div>
+    <div class="tc rv"><div class="ic">T</div><div class="r">CTO</div><div class="rs">Tech · 기술 총괄</div>
+      <ul><li>멀티앱 SaaS 아키텍처 단독 설계 · 운영</li><li>웹 · 모바일 · 백엔드 · 인프라 풀스택</li><li>AI 엔지니어링 · 멀티 LLM 오케스트레이션</li></ul></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="cta rv">
+    <p>최고의 결과물은 뛰어난 동료들과의 건강한 토론과 협력 속에서 탄생한다고 믿습니다.</p>
+    <div class="by">LET'S BUILD SOMETHING GREAT</div>
+  </div>
+</div></section>
+
+<footer>© PORTFOLIO — SPATIAL 3D SAMPLE</footer>
+
+<script>
+(function(){
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  if(RM||!window.matchMedia('(min-width:761px)').matches)return;
+  var scene=document.querySelector('.scene'),stage=document.getElementById('heroStage');
+  scene.addEventListener('mousemove',function(e){var r=scene.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    stage.style.setProperty('--ry',(px*14).toFixed(2)+'deg');stage.style.setProperty('--rx',(-py*10).toFixed(2)+'deg');});
+  scene.addEventListener('mouseleave',function(){stage.style.setProperty('--ry','0deg');stage.style.setProperty('--rx','0deg');});
+  document.querySelectorAll('#cards .tc').forEach(function(c){
+    c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();var x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      c.style.transform='perspective(800px) rotateY('+(x*9).toFixed(2)+'deg) rotateX('+(-y*9).toFixed(2)+'deg) translateZ(8px)';});
+    c.addEventListener('mouseleave',function(){c.style.transform='';});});
+})();
+</script>
+</body>
+</html>

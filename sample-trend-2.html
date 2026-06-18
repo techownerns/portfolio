@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trend 2 · Organic Anti-grid</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root{--bg:#fbf7f1;--fg:#211d2b;--muted:#6b6577;--c1:#ff7a59;--c2:#7c5cff;--c3:#34c8a0;--line:rgba(33,29,43,.12);--maxw:1140px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard",system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.7;-webkit-font-smoothing:antialiased;font-size:16px;word-break:keep-all;overflow-x:hidden;position:relative}
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;filter:blur(10px);opacity:.9}
+.mesh b{position:absolute;border-radius:50%;filter:blur(60px)}
+.mesh .b1{width:46vw;height:46vw;left:-10vw;top:-12vw;background:var(--c1);opacity:.34;animation:fl1 22s ease-in-out infinite}
+.mesh .b2{width:42vw;height:42vw;right:-12vw;top:18vh;background:var(--c2);opacity:.3;animation:fl2 26s ease-in-out infinite}
+.mesh .b3{width:40vw;height:40vw;left:24vw;bottom:-16vw;background:var(--c3);opacity:.3;animation:fl1 30s ease-in-out infinite}
+@keyframes fl1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-5vw) scale(1.15)}}
+@keyframes fl2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vw,5vw) scale(1.12)}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px;position:relative;z-index:2}
+a{color:inherit;text-decoration:none}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+.sbar{position:sticky;top:0;z-index:30;background:rgba(251,247,241,.7);backdrop-filter:blur(12px)}
+.sbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.sbar .nm{font-size:12px;letter-spacing:.14em;font-weight:800}
+.sbar a{font-size:12px;color:var(--fg);background:var(--fg);color:var(--bg);padding:8px 16px;border-radius:999px;font-weight:600}
+
+.blob{border-radius:42% 58% 56% 44%/46% 44% 56% 54%}
+.kick{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--c2);background:rgba(124,92,255,.12);padding:8px 16px;border-radius:999px}
+.hero{padding:70px 0 60px}
+.hero h1{margin-top:28px;font-size:clamp(40px,7.4vw,84px);font-weight:800;line-height:1.06;letter-spacing:-.035em}
+.hero h1 .hl{position:relative;display:inline-block}
+.hero h1 .hl:after{content:"";position:absolute;left:-4px;right:-4px;bottom:6px;height:.34em;z-index:-1;background:linear-gradient(90deg,var(--c1),var(--c2));opacity:.4;border-radius:8px}
+.hero .layout{margin-top:44px;display:grid;grid-template-columns:1.4fr .9fr;gap:30px;align-items:start}
+@media(max-width:820px){.hero .layout{grid-template-columns:1fr}}
+.hero .sub{font-size:17px;color:var(--muted);max-width:520px;transform:rotate(-.4deg)}
+.bubble{background:#fff;border:1px solid var(--line);padding:26px;box-shadow:0 24px 60px -30px rgba(124,92,255,.5);transform:rotate(1.6deg)}
+.bubble.blob{border-radius:38% 62% 58% 42%/52% 40% 60% 48%}
+.bubble h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--c1);font-weight:800}
+.bubble .stat{margin-top:14px;display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dashed var(--line)}
+.bubble .stat:last-child{border-bottom:none}
+.bubble .stat b{font-size:22px;font-weight:800}
+.bubble .stat span{font-size:12.5px;color:var(--muted)}
+
+section{padding:80px 0}
+.shead{margin-bottom:42px}
+.shead h2{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.02em}
+.shead p{margin-top:8px;color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.oc{background:#fff;border:1px solid var(--line);padding:30px 28px;border-radius:30px 30px 30px 6px;transition:.3s}
+.oc:nth-child(2){transform:translateY(18px) rotate(-1deg)}
+.oc:nth-child(3){transform:translateY(-6px) rotate(.6deg)}
+.oc:hover{transform:translateY(-6px) rotate(0);box-shadow:0 30px 60px -30px rgba(124,92,255,.45)}
+.oc .ic{width:48px;height:48px;display:grid;place-items:center;font-size:22px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));margin-bottom:18px}
+.oc:nth-child(2) .ic{background:linear-gradient(135deg,var(--c2),var(--c3))}
+.oc:nth-child(3) .ic{background:linear-gradient(135deg,var(--c3),var(--c1))}
+.oc .ic{border-radius:46% 54% 50% 50%/54% 50% 50% 46%}
+.oc .r{font-size:22px;font-weight:800}
+.oc .rs{margin-top:3px;font-size:12.5px;color:var(--c2);font-weight:700}
+.oc ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:11px}
+.oc li{font-size:14px;color:var(--muted);padding-left:18px;position:relative}
+.oc li:before{content:"●";position:absolute;left:0;font-size:8px;top:5px;color:var(--c1)}
+
+.cta{margin:0 auto;text-align:center;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;padding:80px 28px;border-radius:60px}
+.cta p{font-size:clamp(24px,3.6vw,40px);font-weight:800;letter-spacing:-.02em;max-width:760px;margin:0 auto;line-height:1.35}
+.cta .by{margin-top:24px;font-size:12px;letter-spacing:.2em;opacity:.85;font-weight:700}
+footer{padding:40px 0;text-align:center;font-size:12px;letter-spacing:.12em;color:var(--muted)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="mesh"><b class="b1"></b><b class="b2"></b><b class="b3"></b></div>
+<div class="sbar"><div class="wrap"><span class="nm">TREND 02 · ORGANIC</span><a href="./" target="_blank">현재 라이브</a></div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="kick">● Founder · Full-Stack · AI</span>
+  <h1>사업과 서비스를 기획하고,<br><span class="hl">풀스택</span>으로 직접 개발합니다.</h1>
+  <div class="layout">
+    <p class="sub">아이디어부터 수익화까지 밸류체인 전 구간을 단독 리드 — 생성형 AI를 레버리지해 통상 한 팀이 2년에 만들 규모를 1인이 1개월에 설계·개발·상용화했습니다.</p>
+    <div class="bubble blob">
+      <h4>Track Record</h4>
+      <div class="stat"><span>창업 및 엑싯</span><b>4회</b></div>
+      <div class="stat"><span>IT 서비스 출시</span><b>40+</b></div>
+      <div class="stat"><span>기업 영업 · 제휴</span><b>100+</b></div>
+      <div class="stat"><span>AI Agent</span><b>상용화</b></div>
+      <div class="stat"><span>VC · 기관</span><b>투자유치</b></div>
+    </div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="shead rv"><h2>전략과 실행을 겸비한 리더십</h2><p>C-Level · 사업 · 상품 · 기술 총괄</p></div>
+  <div class="cards">
+    <div class="oc rv"><div class="ic">C</div><div class="r">CEO</div><div class="rs">대표이사 · 사업 총괄</div>
+      <ul><li>Enterprise AI 스타트업 · 200억 밸류</li><li>시니어 오프라인 커뮤니티 플랫폼</li><li>VC · 기관 투자유치 · P&amp;L 의사결정</li></ul></div>
+    <div class="oc rv"><div class="ic">P</div><div class="r">CPO</div><div class="rs">Product · 상품 총괄</div>
+      <ul><li>40여 개 IT 서비스 · 솔루션 출시</li><li>기획 ~ 디자인 ~ 개발 전 과정 PM/PO</li><li>VOC · 데이터 기반 의사결정</li></ul></div>
+    <div class="oc rv"><div class="ic">T</div><div class="r">CTO</div><div class="rs">Tech · 기술 총괄</div>
+      <ul><li>멀티앱 SaaS 아키텍처 단독 설계 · 운영</li><li>웹 · 모바일 · 백엔드 · 인프라 풀스택</li><li>AI 엔지니어링 · 멀티 LLM 오케스트레이션</li></ul></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="cta rv">
+    <p>최고의 결과물은 뛰어난 동료들과의 건강한 토론과 협력 속에서 탄생한다고 믿습니다.</p>
+    <div class="by">LET'S BUILD SOMETHING GREAT</div>
+  </div>
+</div></section>
+
+<footer>© PORTFOLIO — ORGANIC ANTI-GRID SAMPLE</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

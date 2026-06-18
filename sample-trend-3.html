@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trend 3 · Dopamine Gradient</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root{--bg:#0a0612;--fg:#fdf7ff;--muted:#b9a7d6;--p:#ff3df0;--c:#19e3ff;--y:#ffe14d;--line:rgba(255,255,255,.12);--maxw:1140px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard",system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px;word-break:keep-all;overflow-x:hidden;position:relative}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:
+ radial-gradient(50% 40% at 12% 0%,rgba(255,61,240,.32),transparent 60%),
+ radial-gradient(50% 40% at 88% 8%,rgba(25,227,255,.28),transparent 60%),
+ radial-gradient(60% 50% at 50% 108%,rgba(255,225,77,.16),transparent 60%)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px;position:relative;z-index:2}
+a{color:inherit;text-decoration:none}
+@keyframes gshift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+.sbar{position:sticky;top:0;z-index:30;background:rgba(10,6,18,.6);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.sbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.sbar .nm{font-size:12px;letter-spacing:.14em;font-weight:800;background:linear-gradient(90deg,var(--p),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sbar a{font-size:12.5px;color:var(--muted);border:1px solid var(--line);padding:7px 14px;border-radius:999px}
+
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#0a0612;background:linear-gradient(90deg,var(--p),var(--c));padding:8px 16px;border-radius:999px}
+.hero{padding:84px 0 64px;text-align:center}
+.hero h1{margin:26px auto 0;font-size:clamp(40px,8vw,96px);font-weight:900;letter-spacing:-.035em;line-height:1.02;max-width:15ch;
+ background:linear-gradient(100deg,#fff,var(--p),var(--y),var(--c),#fff);background-size:280% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gshift 8s linear infinite}
+.hero .sub{margin:22px auto 0;max-width:620px;font-size:17px;color:var(--muted)}
+.chips{margin-top:34px;display:flex;flex-wrap:wrap;gap:11px;justify-content:center}
+.chips span{font-size:15px;font-weight:700;padding:11px 20px;border-radius:999px;color:#0a0612}
+.chips span:nth-child(1){background:var(--p)}.chips span:nth-child(2){background:var(--c)}.chips span:nth-child(3){background:var(--y)}
+.chips span:nth-child(4){background:linear-gradient(90deg,var(--p),var(--c));color:#0a0612}.chips span:nth-child(5){background:#fff}
+
+section{padding:74px 0}
+.shead{text-align:center;margin-bottom:42px}
+.shead .k{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(90deg,var(--p),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.shead h2{margin-top:8px;font-size:clamp(30px,4.6vw,52px);font-weight:900;letter-spacing:-.025em}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:linear-gradient(135deg,var(--p),var(--c),var(--y));border-radius:24px;padding:3px}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.dc{background:#120a1f;border-radius:21px;padding:28px 26px;transition:.25s}
+.dc:hover{background:#180d28;transform:translateY(-4px)}
+.dc .ic{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:13px;font-size:20px;font-weight:900;color:#0a0612;background:linear-gradient(135deg,var(--p),var(--c));margin-bottom:16px}
+.dc .r{font-size:22px;font-weight:900}
+.dc .rs{margin-top:3px;font-size:12.5px;font-weight:700;color:var(--c)}
+.dc ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:11px}
+.dc li{font-size:14px;color:var(--muted);padding-left:17px;position:relative}
+.dc li:before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--y)}
+
+.cta{margin:0 auto;text-align:center;border-radius:30px;padding:78px 28px;background:linear-gradient(120deg,var(--p),var(--c));background-size:200% auto;animation:gshift 9s linear infinite;color:#0a0612}
+.cta p{font-size:clamp(24px,3.6vw,42px);font-weight:900;letter-spacing:-.02em;max-width:760px;margin:0 auto;line-height:1.3}
+.cta .by{margin-top:22px;font-size:12px;letter-spacing:.2em;font-weight:800;opacity:.8}
+footer{padding:40px 0;text-align:center;font-size:12px;letter-spacing:.12em;color:var(--muted)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}.hero h1{color:#fff}}
+</style>
+</head>
+<body>
+<div class="sbar"><div class="wrap"><span class="nm">TREND 03 · DOPAMINE</span><a href="./" target="_blank">현재 라이브</a></div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="pill">Founder · Full-Stack · AI</span>
+  <h1>사업과 서비스를 기획하고, 풀스택으로 직접 개발합니다.</h1>
+  <p class="sub">아이디어부터 수익화까지 밸류체인 전 구간을 단독 리드 — 생성형 AI로 멀티앱 SaaS를 1인 개발로 상용 운영합니다.</p>
+  <div class="chips"><span>4회 창업 · 엑싯</span><span>40+ IT 서비스</span><span>AI Agent 상용화</span><span>100+ 기업 제휴</span><span>VC 투자유치</span></div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="shead rv"><div class="k">Leadership</div><h2>전략과 실행을 겸비한 리더십</h2></div>
+  <div class="cards">
+    <div class="dc rv"><div class="ic">C</div><div class="r">CEO</div><div class="rs">대표이사 · 사업 총괄</div>
+      <ul><li>Enterprise AI 스타트업 · 200억 밸류</li><li>시니어 오프라인 커뮤니티 플랫폼</li><li>VC · 기관 투자유치 · P&amp;L 의사결정</li></ul></div>
+    <div class="dc rv"><div class="ic">P</div><div class="r">CPO</div><div class="rs">Product · 상품 총괄</div>
+      <ul><li>40여 개 IT 서비스 · 솔루션 출시</li><li>기획 ~ 디자인 ~ 개발 전 과정 PM/PO</li><li>VOC · 데이터 기반 의사결정</li></ul></div>
+    <div class="dc rv"><div class="ic">T</div><div class="r">CTO</div><div class="rs">Tech · 기술 총괄</div>
+      <ul><li>멀티앱 SaaS 아키텍처 단독 설계 · 운영</li><li>웹 · 모바일 · 백엔드 · 인프라 풀스택</li><li>AI 엔지니어링 · 멀티 LLM 오케스트레이션</li></ul></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="cta rv">
+    <p>최고의 결과물은 뛰어난 동료들과의 건강한 토론과 협력 속에서 탄생한다고 믿습니다.</p>
+    <div class="by">LET'S BUILD SOMETHING GREAT</div>
+  </div>
+</div></section>
+
+<footer>© PORTFOLIO — DOPAMINE GRADIENT SAMPLE</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

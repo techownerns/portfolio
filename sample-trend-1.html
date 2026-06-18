@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trend 1 · Kinetic Type</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<style>
+:root{--bg:#08080a;--fg:#f3f2ee;--muted:#8d8a84;--acc:#d8ff3e;--line:rgba(255,255,255,.1);--maxw:1200px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard Variable","Pretendard",system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px;word-break:keep-all;overflow-x:hidden}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+a{color:inherit;text-decoration:none}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+.sbar{position:sticky;top:0;z-index:30;background:rgba(8,8,10,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.sbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.sbar .nm{font-size:12px;letter-spacing:.14em;font-weight:800;color:var(--acc)}
+.sbar a{font-size:12px;letter-spacing:.12em;color:var(--muted);border:1px solid var(--line);padding:7px 14px;border-radius:2px}
+
+.kick{font-size:13px;letter-spacing:.3em;font-weight:700;text-transform:uppercase;color:var(--acc)}
+.hero{padding:90px 0 70px}
+.hero .kick{margin-bottom:24px}
+.kin{font-weight:900;line-height:.92;letter-spacing:-.04em;text-transform:none;transform-origin:left center;will-change:transform,letter-spacing,font-variation-settings}
+.hero h1{font-size:clamp(48px,13vw,170px)}
+.hero h1 .o{color:transparent;-webkit-text-stroke:2px var(--fg)}
+.hero .sub{margin-top:40px;max-width:620px;font-size:18px;color:var(--muted)}
+.scrollnote{margin-top:30px;font-size:12px;letter-spacing:.2em;color:var(--muted)}
+
+.marquee{margin:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0}
+.marquee .t{display:inline-flex;gap:40px;animation:mq 26s linear infinite;font-weight:900;font-size:clamp(28px,5vw,64px);letter-spacing:-.02em}
+.marquee .t span{color:transparent;-webkit-text-stroke:1.4px var(--muted)}
+.marquee .t span.f{color:var(--acc);-webkit-text-stroke:0}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:90px 0;border-top:1px solid var(--line)}
+.shead{margin-bottom:50px}
+.shead h2{font-size:clamp(40px,8vw,96px)}
+.shead p{margin-top:12px;font-size:14px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line)}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}}
+.metrics .m{padding:30px 10px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.metrics .mv{font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.02em}
+.metrics .mv .u{color:var(--acc)}
+.metrics .ml{margin-top:6px;font-size:12.5px;color:var(--muted)}
+
+.lead{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+@media(max-width:820px){.lead{grid-template-columns:1fr}}
+.lc{padding:0 30px;border-left:1px solid var(--line)}
+.lc:first-child{padding-left:0;border-left:none}
+@media(max-width:820px){.lc{padding:30px 0;border-left:none;border-top:1px solid var(--line)}.lc:first-child{padding-top:0;border-top:none}}
+.lc .r{font-size:44px;font-weight:900;letter-spacing:-.03em}
+.lc .rs{margin-top:4px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.lc ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:13px}
+.lc li{font-size:14.5px;color:var(--muted);padding-left:16px;position:relative;line-height:1.55}
+.lc li:before{content:"→";position:absolute;left:0;color:var(--acc)}
+
+footer{padding:60px 0;border-top:1px solid var(--line)}
+footer .big{font-size:clamp(30px,6vw,76px);font-weight:900;letter-spacing:-.03em;line-height:1.02}
+footer .big .o{color:transparent;-webkit-text-stroke:2px var(--fg)}
+footer .by{margin-top:24px;font-size:12px;letter-spacing:.2em;color:var(--acc)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}.kin{transform:none!important}}
+</style>
+</head>
+<body>
+<div class="sbar"><div class="wrap"><span class="nm">TREND 01 · KINETIC TYPE</span><a href="./" target="_blank">현재 라이브</a></div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="kick">Founder · Full-Stack · AI</div>
+  <h1 class="kin" data-k>기획하고<br><span class="o">개발한다</span></h1>
+  <p class="sub">사업과 서비스를 기획하고, 풀스택으로 직접 개발합니다. 아이디어부터 수익화까지 밸류체인 전 구간을 단독 리드 — 생성형 AI로 멀티앱 SaaS를 1인 개발로 상용 운영합니다.</p>
+  <div class="scrollnote">↓ SCROLL — 글자가 반응합니다</div>
+</div></header>
+
+<div class="marquee"><div class="t">
+  <span class="f">기획</span><span>설계</span><span class="f">개발</span><span>배포</span><span class="f">운영</span><span>수익화</span>
+  <span class="f">기획</span><span>설계</span><span class="f">개발</span><span>배포</span><span class="f">운영</span><span>수익화</span>
+</div></div>
+
+<section><div class="wrap">
+  <div class="shead rv"><h2 class="kin" data-k>TRACK<br>RECORD</h2><p>검증된 성과</p></div>
+  <div class="metrics rv">
+    <div class="m"><div class="mv">4<span class="u">회</span></div><div class="ml">창업 및 엑싯</div></div>
+    <div class="m"><div class="mv">40<span class="u">+</span></div><div class="ml">IT 서비스 출시</div></div>
+    <div class="m"><div class="mv">100<span class="u">+</span></div><div class="ml">기업 영업 · 제휴</div></div>
+    <div class="m"><div class="mv">AI</div><div class="ml">Agent 상용화</div></div>
+    <div class="m"><div class="mv">VC</div><div class="ml">기관 투자유치</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead rv"><h2 class="kin" data-k>LEADERSHIP</h2><p>C-Level · 사업 · 상품 · 기술</p></div>
+  <div class="lead">
+    <div class="lc rv"><div class="r">CEO</div><div class="rs">사업 총괄</div>
+      <ul><li>Enterprise AI 스타트업 · 200억 밸류</li><li>시니어 오프라인 커뮤니티 플랫폼</li><li>VC · 기관 투자유치 · P&amp;L 의사결정</li></ul></div>
+    <div class="lc rv"><div class="r">CPO</div><div class="rs">상품 총괄</div>
+      <ul><li>40여 개 IT 서비스 · 솔루션 출시</li><li>기획 ~ 디자인 ~ 개발 전 과정 PM/PO</li><li>VOC · 데이터 기반 의사결정</li></ul></div>
+    <div class="lc rv"><div class="r">CTO</div><div class="rs">기술 총괄</div>
+      <ul><li>멀티앱 SaaS 아키텍처 단독 설계 · 운영</li><li>웹 · 모바일 · 백엔드 · 인프라 풀스택</li><li>AI 엔지니어링 · 멀티 LLM 오케스트레이션</li></ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="big kin" data-k>LET'S <span class="o">BUILD</span></div>
+  <div class="by">SOMETHING GREAT — 함께 만들 동료를 찾습니다</div>
+</div></footer>
+
+<script>
+(function(){
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  if(RM)return;
+  var kins=document.querySelectorAll('[data-k]');
+  function onScroll(){var vh=window.innerHeight;kins.forEach(function(el){var b=el.getBoundingClientRect();
+    var c=b.top+b.height/2; var p=1-Math.min(Math.abs(c-vh/2)/(vh*0.7),1); // 0 at edges, 1 centered
+    var sx=0.86+p*0.14, ls=(-0.07+p*0.03); el.style.transform='scaleX('+sx.toFixed(3)+')'; el.style.letterSpacing=ls.toFixed(3)+'em';});}
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
+})();
+</script>
+</body>
+</html>
