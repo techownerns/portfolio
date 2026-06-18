@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design A · Noir Luxe</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" />
+<style>
+:root{
+  --bg:#0a0a0b; --panel:#0f0f11; --fg:#eceae3; --muted:#94908a; --faint:#5d5a54;
+  --gold:#c6a86b; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.18); --maxw:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Pretendard",system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.75;-webkit-font-smoothing:antialiased;font-size:16px;word-break:keep-all;overflow-x:hidden}
+.serif{font-family:"Noto Serif KR","Pretendard",serif}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+a{color:inherit;text-decoration:none}
+
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+.sbar{position:sticky;top:0;z-index:30;background:rgba(10,10,11,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.sbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.sbar .nm{font-size:12px;letter-spacing:.34em;color:var(--gold);font-weight:600}
+.sbar a{font-size:12px;letter-spacing:.16em;color:var(--muted);border:1px solid var(--line);padding:8px 16px;border-radius:2px;transition:.25s}
+.sbar a:hover{color:var(--fg);border-color:var(--line2)}
+
+.kick{font-size:12px;letter-spacing:.42em;color:var(--gold);font-weight:600;text-transform:uppercase}
+.hero{padding:120px 0 96px;position:relative}
+.hero .kick{animation:up .9s .05s both}
+.hero h1{margin-top:30px;font-size:clamp(34px,6vw,72px);font-weight:600;line-height:1.22;letter-spacing:-.01em;animation:up 1s .15s both}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{margin-top:30px;max-width:600px;font-size:16px;color:var(--muted);letter-spacing:.01em;animation:up 1s .3s both}
+.rule{height:1px;background:var(--line);margin:0}
+.hero .rule{margin:56px 0 0;animation:up 1s .4s both}
+
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);animation:up 1s .5s both}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line)}}
+.metrics .m{padding:34px 8px 30px;border-right:1px solid var(--line)}
+.metrics .m:last-child{border-right:none}
+@media(max-width:760px){.metrics .m{background:var(--bg);border:none}}
+.metrics .mv{font-size:30px;font-weight:600;letter-spacing:-.01em;color:var(--fg)}
+.metrics .mv .u{color:var(--gold)}
+.metrics .ml{margin-top:8px;font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+
+section{padding:96px 0;border-top:1px solid var(--line)}
+.shead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:54px;gap:20px;flex-wrap:wrap}
+.shead h2{font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.01em}
+.shead p{font-size:14px;color:var(--muted);letter-spacing:.02em}
+
+.lead-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.lead-grid{grid-template-columns:1fr}}
+.lc{padding:0 34px;border-left:1px solid var(--line)}
+.lc:first-child{padding-left:0;border-left:none}
+@media(max-width:820px){.lc{padding:34px 0;border-left:none;border-top:1px solid var(--line)}.lc:first-child{padding-top:0;border-top:none}}
+.lc .role{font-size:26px;font-weight:600;letter-spacing:.02em}
+.lc .rsub{margin-top:6px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.lc ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:14px}
+.lc li{font-size:14.5px;color:var(--muted);padding-left:18px;position:relative;line-height:1.6}
+.lc li:before{content:"";position:absolute;left:0;top:11px;width:6px;height:1px;background:var(--gold)}
+
+.quote{padding:120px 0;text-align:center;border-top:1px solid var(--line)}
+.quote p{font-size:clamp(22px,3vw,34px);font-weight:500;line-height:1.6;max-width:780px;margin:0 auto;color:var(--fg)}
+.quote .by{margin-top:36px;font-size:12px;letter-spacing:.34em;color:var(--gold)}
+
+footer{padding:44px 0;border-top:1px solid var(--line);text-align:center;font-size:12px;letter-spacing:.16em;color:var(--faint)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="sbar"><div class="wrap"><span class="nm">DESIGN A · NOIR LUXE</span><a href="./" target="_blank">현재 라이브</a></div></div>
+
+<header class="hero"><div class="wrap">
+  <div class="kick">Founder · Full-Stack · AI</div>
+  <h1 class="serif">사업과 서비스를 기획하고,<br><em>풀스택</em>으로 직접 개발합니다.</h1>
+  <p class="sub">아이디어부터 수익화까지 밸류체인 전 구간을 단독으로 리드합니다. 생성형 AI를 레버리지해, 통상 한 팀이 2년에 만들 규모를 1인이 1개월에 설계·개발·상용화했습니다.</p>
+  <div class="rule"></div>
+  <div class="metrics">
+    <div class="m"><div class="mv">4<span class="u">회</span></div><div class="ml">창업 및 엑싯</div></div>
+    <div class="m"><div class="mv">40<span class="u">+</span></div><div class="ml">IT 서비스 출시</div></div>
+    <div class="m"><div class="mv">100<span class="u">+</span></div><div class="ml">기업 영업 · 제휴</div></div>
+    <div class="m"><div class="mv serif">AI</div><div class="ml">Agent 상용화</div></div>
+    <div class="m"><div class="mv serif">VC</div><div class="ml">기관 투자유치</div></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="shead rv"><h2 class="serif">전략과 실행을 겸비한 리더십</h2><p>C-Level · 사업 · 상품 · 기술 총괄</p></div>
+  <div class="lead-grid">
+    <div class="lc rv"><div class="role serif">CEO</div><div class="rsub">대표이사 · 사업 총괄</div>
+      <ul><li>Enterprise AI 스타트업 · 200억 밸류</li><li>시니어 오프라인 커뮤니티 플랫폼</li><li>VC · 기관 투자유치 · P&amp;L 의사결정</li></ul></div>
+    <div class="lc rv"><div class="role serif">CPO</div><div class="rsub">Product · 상품 총괄</div>
+      <ul><li>40여 개 IT 서비스 · 솔루션 출시</li><li>기획 ~ 디자인 ~ 개발 전 과정 PM/PO</li><li>VOC · 데이터 기반 의사결정</li></ul></div>
+    <div class="lc rv"><div class="role serif">CTO</div><div class="rsub">Tech · 기술 총괄</div>
+      <ul><li>멀티앱 SaaS 아키텍처 단독 설계 · 운영</li><li>웹 · 모바일 · 백엔드 · 인프라 풀스택</li><li>AI 엔지니어링 · 멀티 LLM 오케스트레이션</li></ul></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="shead rv"><h2 class="serif">핵심 역량</h2><p>Capabilities</p></div>
+  <div class="lead-grid">
+    <div class="lc rv"><div class="role serif">01</div><div class="rsub">AI 상용화</div>
+      <ul><li>엔터프라이즈 AI Agent End-to-End 리드</li><li>대기업 · 금융 · 공공 초기 고객사 확보</li></ul></div>
+    <div class="lc rv"><div class="role serif">02</div><div class="rsub">풀스택 개발</div>
+      <ul><li>설계 · 구현 · 배포 · 운영 단독 수행</li><li>RLS 기반 멀티테넌트 SaaS 상용 운영</li></ul></div>
+    <div class="lc rv"><div class="role serif">03</div><div class="rsub">사업 전략</div>
+      <ul><li>Zero to One · GTM · 수익 구조 설계</li><li>IR · 사업계획서 직접 작성 및 라운드</li></ul></div>
+  </div>
+</div></section>
+
+<div class="quote"><div class="wrap">
+  <p class="serif rv">“최고의 결과물은 뛰어난 동료들과의 건강한 토론과 협력 속에서 탄생한다고 믿습니다.”</p>
+  <div class="by rv">LET'S BUILD SOMETHING GREAT</div>
+</div></div>
+
+<footer>© PORTFOLIO — NOIR LUXE SAMPLE</footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>
