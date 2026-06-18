@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sample · 역동적 UI 3안</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard",system-ui,sans-serif;background:#06060d;color:#e9ebf8;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;z-index:3}
+@keyframes shimmer{to{background-position:200% center}}
+
+.bar{position:sticky;top:0;z-index:40;background:rgba(6,6,13,.62);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(255,255,255,.09)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:54px}
+.bar b{font-size:12px;letter-spacing:.16em;font-weight:700;color:#c7cbff}
+.bar a{font-size:12.5px;color:#a4a9c8;border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:999px;display:inline-flex;gap:6px;align-items:center}
+.bar a i{color:#67e8f9}
+
+.vh{position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.07);padding:60px 0 84px;min-height:92vh;display:flex;flex-direction:column;justify-content:center}
+.vh:first-of-type{border-top:none}
+.vlabel{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.08em;color:#06060d;background:linear-gradient(135deg,#a5b4fc,#67e8f9);padding:6px 13px;border-radius:999px;margin-bottom:16px}
+.vnote{font-size:12.5px;color:#9499bd;margin-bottom:30px;max-width:780px}
+.recpill{background:linear-gradient(135deg,#fbbf24,#f472b6)!important;color:#fff!important}
+.dyn-h{font-size:clamp(32px,5.6vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#fff}
+.dyn-sub{font-size:15px;color:#aeb4d6;margin-top:14px;max-width:680px}
+
+/* metric pills (shared) */
+.mpills{margin-top:26px;display:flex;flex-wrap:wrap;gap:11px}
+.mpills span{font-size:15px;font-weight:600;color:#e9ecfb;background:rgba(129,140,248,.15);border:1px solid rgba(129,140,248,.32);padding:11px 20px;border-radius:999px}
+
+/* ============ 1. FLOW FIELD ============ */
+.flowcv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.as1 .wrap{z-index:3}
+.as1 .dyn-h{filter:drop-shadow(0 6px 30px rgba(34,211,238,.35));background:linear-gradient(90deg,#fff,#a5b4fc,#67e8f9,#fff);background-size:240% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+
+/* ============ 2. KINETIC MARQUEE WALL ============ */
+.as2{background:linear-gradient(160deg,#0a0814,#100a1e)}
+.kmw{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;justify-content:center;gap:6px;pointer-events:none;opacity:.9}
+.kmw-row{font-size:clamp(46px,10vw,128px);font-weight:900;letter-spacing:-.02em;white-space:nowrap;line-height:1.02;display:flex}
+.kmw-row .kmw-track{display:inline-flex;flex-shrink:0;animation:mqL 24s linear infinite}
+.kmw-row.rev .kmw-track{animation:mqR 30s linear infinite}
+.kmw-row .kmw-track span{padding:0 26px}
+.kmw-row.out .kmw-track span{-webkit-text-stroke:1.4px rgba(129,140,248,.35);color:transparent}
+.kmw-row.fill .kmw-track span{background:linear-gradient(90deg,#1b2150,#2a2050);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kmw-row.cyan .kmw-track span{-webkit-text-stroke:1.4px rgba(34,211,238,.3);color:transparent}
+@keyframes mqL{to{transform:translateX(-50%)}}
+@keyframes mqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.as2 .wrap{z-index:3}
+.as2 .center{text-align:center;display:flex;flex-direction:column;align-items:center;background:radial-gradient(80% 120% at 50% 50%,rgba(6,6,13,.78),transparent 75%);padding:30px 0}
+.as2 .dyn-h{text-shadow:0 8px 40px rgba(0,0,0,.6)}
+.as2 .mpills{justify-content:center}
+.as2 .mpills span{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);backdrop-filter:blur(6px)}
+
+/* ============ 3. SPRING CLUSTER ============ */
+.as3 .springwrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+@media(max-width:820px){.as3 .springwrap{grid-template-columns:1fr}}
+.springbox{position:relative;height:380px;border:1px solid rgba(255,255,255,.07);border-radius:22px;background:radial-gradient(120% 120% at 50% 0%,rgba(129,140,248,.08),transparent 60%);overflow:hidden}
+.sp-chip{position:absolute;left:0;top:0;will-change:transform;display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 20px;border-radius:16px;background:rgba(20,22,46,.9);border:1px solid rgba(129,140,248,.3);box-shadow:0 16px 40px -18px rgba(34,211,238,.5);cursor:default}
+.sp-chip b{font-size:24px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#67e8f9,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sp-chip span{font-size:12px;color:#aeb4d6}
+.sp-core{position:absolute;left:50%;top:50%;width:74px;height:74px;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#222652,#0a0a16);border:1px solid rgba(129,140,248,.4);color:#a5f3fc;font-size:26px;box-shadow:0 0 40px -6px rgba(34,211,238,.6);z-index:2}
+.sp-hint{margin-top:14px;font-size:12px;color:#6d7299;display:flex;align-items:center;gap:7px}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap"><b>SAMPLE · 역동적 UI 3안</b><a href="./" target="_blank"><i class="ti ti-external-link"></i>현재 라이브</a></div></div>
+
+<!-- 1. FLOW FIELD -->
+<section class="vh as1">
+  <canvas class="flowcv" id="flowcv"></canvas>
+  <div class="wrap">
+    <div class="vlabel recpill"><i class="ti ti-wind"></i>① Flow Field 스트림 · 생성형 모션</div>
+    <div class="vnote">수천 개 입자가 벡터장을 따라 끊임없이 흐르며 리본 궤적을 그린다. 화면 전체가 살아 움직이는 생성형 배경 — 정적인 파티클과 전혀 다른 결.</div>
+    <h1 class="dyn-h">사업과 서비스를 기획하고,<br>풀스택으로 직접 개발합니다.</h1>
+    <p class="dyn-sub">아이디어부터 수익화까지 밸류체인 전 구간을 단독 리드 — AI를 레버리지해 1인 개발로 상용 운영.</p>
+    <div class="mpills">
+      <span>4회 창업 · 엑싯</span><span>40+ IT 서비스</span><span>AI Agent 상용화</span><span>100+ 기업 제휴</span><span>VC 투자유치</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2. KINETIC MARQUEE WALL -->
+<section class="vh as2">
+  <div class="kmw" id="kmw"></div>
+  <div class="wrap">
+    <div class="center">
+      <div class="vlabel"><i class="ti ti-arrows-horizontal"></i>② 키네틱 마퀴 월 · Brutalist Motion</div>
+      <div class="vnote">거대 텍스트 띠가 반대 방향으로 흐르는 키네틱 월. 강한 타이포와 모션이 에너지를 만든다.</div>
+      <h1 class="dyn-h">사업과 서비스를 기획하고,<br>풀스택으로 직접 개발합니다.</h1>
+      <div class="mpills">
+        <span>4회 창업 · 엑싯</span><span>40+ IT 서비스</span><span>AI Agent 상용화</span><span>100+ 기업 제휴</span><span>VC 투자유치</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. SPRING CLUSTER -->
+<section class="vh as3">
+  <div class="wrap">
+    <div class="vlabel"><i class="ti ti-atom-2"></i>③ 스프링 물리 클러스터 · Interactive</div>
+    <div class="vnote">지표 칩이 공중에서 부드럽게 부유하고, 커서를 가까이 대면 스프링처럼 밀려났다가 탄성으로 제자리로. 물리 기반 인터랙션.</div>
+    <div class="springwrap">
+      <div>
+        <h1 class="dyn-h">한 사람이<br>전 과정을 움직입니다.</h1>
+        <p class="dyn-sub">기획 · 풀스택 개발 · AI · 운영을 한 사람 안에서 통합. 오른쪽 클러스터에 마우스를 올려보세요.</p>
+        <div class="sp-hint"><i class="ti ti-pointer"></i>커서로 밀어보기</div>
+      </div>
+      <div class="springbox" id="springbox">
+        <div class="sp-core"><i class="ti ti-cpu"></i></div>
+        <div class="sp-chip"><b>4회</b><span>창업 · 엑싯</span></div>
+        <div class="sp-chip"><b>40+</b><span>IT 서비스</span></div>
+        <div class="sp-chip"><b>AI</b><span>Agent 상용화</span></div>
+        <div class="sp-chip"><b>100+</b><span>기업 제휴</span></div>
+        <div class="sp-chip"><b>VC</b><span>투자유치</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- 2. marquee wall (build rows) ---- */
+  var kmw=document.getElementById('kmw');
+  if(kmw){
+    var ROWS=[
+      {cls:'out',words:['기획','전략','GTM','제품화','운영','수익화']},
+      {cls:'cyan rev',words:['PLAN','BUILD','SHIP','OPERATE','MONETIZE']},
+      {cls:'fill',words:['AI','SaaS','풀스택','에이전트','1인 개발']},
+      {cls:'out rev',words:['FOUNDER','CTO','CPO','PRODUCT','GROWTH']}
+    ];
+    ROWS.forEach(function(r){
+      var row=document.createElement('div');row.className='kmw-row '+r.cls;
+      var t=document.createElement('div');t.className='kmw-track';
+      var html='';for(var k=0;k<2;k++){for(var i=0;i<r.words.length;i++){html+='<span>'+r.words[i]+' ·</span>';}}
+      t.innerHTML=html;row.appendChild(t);kmw.appendChild(row);
+    });
+  }
+
+  if(RM)return;
+
+  /* ---- 1. flow field canvas ---- */
+  var cv=document.getElementById('flowcv');
+  if(cv&&cv.getContext){
+    var ctx=cv.getContext('2d'),sec=cv.parentNode,W,H,pts,T=0;
+    var PAL=['rgba(129,140,248,','rgba(34,211,238,','rgba(192,132,252,','rgba(52,211,153,'];
+    function size(){W=cv.width=sec.offsetWidth;H=cv.height=sec.offsetHeight;ctx.fillStyle='#06060d';ctx.fillRect(0,0,W,H);}
+    function reset(p){p.x=Math.random()*W;p.y=Math.random()*H;p.px=p.x;p.py=p.y;p.life=40+Math.random()*120;}
+    function init(){size();pts=[];var n=Math.min(420,Math.floor(W*H/4200));for(var i=0;i<n;i++){var p={col:PAL[Math.floor(Math.random()*PAL.length)]};reset(p);pts.push(p);}}
+    function field(px,py,t){return Math.sin(px*0.0021+t)*1.5+Math.cos(py*0.0027-t*0.7)*1.5+(px+py)*0.0005;}
+    function frame(){ctx.fillStyle='rgba(6,6,13,0.055)';ctx.fillRect(0,0,W,H);T+=0.0018;ctx.lineWidth=1.25;
+      for(var i=0;i<pts.length;i++){var p=pts[i];var a=field(p.x,p.y,T);p.px=p.x;p.py=p.y;p.x+=Math.cos(a)*1.6;p.y+=Math.sin(a)*1.6;p.life--;
+        if(p.x<0||p.x>W||p.y<0||p.y>H||p.life<0){reset(p);continue;}
+        ctx.strokeStyle=p.col+'0.55)';ctx.beginPath();ctx.moveTo(p.px,p.py);ctx.lineTo(p.x,p.y);ctx.stroke();}
+      requestAnimationFrame(frame);}
+    init();window.addEventListener('resize',init);frame();
+  }
+
+  /* ---- 3. spring cluster ---- */
+  var box=document.getElementById('springbox');
+  if(box){
+    var chips=[].slice.call(box.querySelectorAll('.sp-chip'));
+    var homes=[[0.5,0.2],[0.21,0.46],[0.79,0.46],[0.34,0.8],[0.66,0.8]];
+    var mouse={x:-999,y:-999},t=0;
+    var P=chips.map(function(c,i){return {el:c,x:0,y:0,vx:0,vy:0,ph:i*1.25,init:false};});
+    box.addEventListener('mousemove',function(e){var r=box.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+    box.addEventListener('mouseleave',function(){mouse.x=-9999;mouse.y=-9999;});
+    function tick(){t+=0.016;var W=box.clientWidth,H=box.clientHeight;
+      for(var i=0;i<P.length;i++){var p=P[i];var hx=homes[i][0]*W,hy=homes[i][1]*H+Math.sin(t*1.1+p.ph)*11;
+        if(!p.init){p.x=hx;p.y=hy;p.init=true;}
+        var ax=(hx-p.x)*0.045,ay=(hy-p.y)*0.045;
+        var dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<140&&d>0){var f=(140-d)/140*7;ax+=dx/d*f;ay+=dy/d*f;}
+        p.vx=(p.vx+ax)*0.85;p.vy=(p.vy+ay)*0.85;p.x+=p.vx;p.y+=p.vy;
+        var w=p.el.offsetWidth,h=p.el.offsetHeight;
+        p.el.style.transform='translate('+(p.x-w/2).toFixed(1)+'px,'+(p.y-h/2).toFixed(1)+'px)';}
+      requestAnimationFrame(tick);}
+    tick();
+  }
+})();
+</script>
+</body>
+</html>
