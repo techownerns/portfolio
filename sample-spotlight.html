@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sample · 지표 스포트라이트 (디테일 복원)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+<style>
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard",system-ui,sans-serif;background:#07070f;color:#e9ebf8;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px;position:relative;z-index:3}
+
+@keyframes fb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-34px) scale(1.16)}}
+@keyframes fb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-36px,30px) scale(1.12)}}
+@keyframes shimmer{to{background-position:200% center}}
+@keyframes rotBorder{to{--a:360deg}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(95px)}
+.aurora .a1{width:520px;height:520px;top:-120px;left:-70px;background:#6d28d9;opacity:.4;animation:fb 24s ease-in-out infinite}
+.aurora .a2{width:480px;height:480px;top:30%;right:-90px;background:#0e7490;opacity:.4;animation:fb2 27s ease-in-out infinite}
+.aurora .a3{width:460px;height:460px;bottom:-130px;left:30%;background:#be185d;opacity:.32;animation:fb 31s ease-in-out infinite}
+.vign{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 50% -10%,transparent 50%,rgba(0,0,0,.5))}
+
+.bar{position:sticky;top:0;z-index:40;background:rgba(7,7,15,.62);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(255,255,255,.09)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:54px}
+.bar b{font-size:12px;letter-spacing:.16em;font-weight:700;color:#c7cbff}
+.bar a{font-size:12.5px;color:#a4a9c8;border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:999px;display:inline-flex;gap:6px;align-items:center}
+.bar a i{color:#67e8f9}
+
+.hero{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;padding:64px 0 84px}
+.vlabel{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.08em;color:#0a0a16;background:linear-gradient(135deg,#fbbf24,#f472b6);color:#fff;padding:6px 13px;border-radius:999px;margin-bottom:14px}
+.vnote{font-size:12.5px;color:#9499bd;margin-bottom:26px;max-width:760px}
+.h1{font-size:clamp(30px,5vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.12;background:linear-gradient(90deg,#fff,#a5b4fc,#67e8f9,#f0abfc,#fff);background-size:240% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite}
+.sub{font-size:15px;color:#aab2da;margin:14px auto 0;max-width:720px}
+.sub b{color:#dfe5ff;font-weight:700}
+
+/* pipeline (big, centered, cycling) */
+.pipe{margin-top:26px;display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;justify-content:center;width:100%;max-width:1000px}
+.pnode{flex:1;min-width:128px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 12px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:16px;transition:.35s}
+.pnode .pi{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:22px;color:#fff;background:linear-gradient(135deg,#818cf8,#22d3ee)}
+.pnode .pt{font-size:14px;font-weight:700;color:#eceeff}
+.pnode .ps{font-size:12px;color:#6d7299}
+.pnode.on{transform:translateY(-5px) scale(1.03);border-color:transparent;background:linear-gradient(135deg,#6d5efc,#22d3ee);box-shadow:0 20px 50px -16px rgba(34,211,238,.72)}
+.pnode.on .pi{background:#fff;color:#4f46e5}.pnode.on .pt{color:#fff}.pnode.on .ps{color:rgba(255,255,255,.85)}
+.parr{display:flex;align-items:center;color:#67e8f9;opacity:.55;font-size:18px}
+@media(max-width:760px){.pnode{min-width:43%}.parr{transform:rotate(90deg)}}
+
+/* spotlight metric cards — full detail restored + sweep highlight */
+.spot-head{margin-top:40px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a5b4fc;display:flex;align-items:center;gap:8px}
+.spot-head i{color:#67e8f9;font-size:15px}
+.spotcards{margin-top:14px;display:grid;grid-template-columns:repeat(5,1fr);gap:13px;width:100%}
+@media(max-width:860px){.spotcards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.spotcards{grid-template-columns:1fr}}
+.spotcard{position:relative;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:22px 16px;text-align:center;transition:transform .5s cubic-bezier(.2,.7,.2,1),background .5s,border-color .5s,box-shadow .5s,opacity .5s;opacity:.6}
+.spotcard .sn{display:block;font-size:clamp(21px,2.3vw,27px);font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#67e8f9,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent;transition:filter .5s}
+.spotcard .st{font-size:14px;font-weight:700;color:#eceeff;margin-top:6px}
+.spotcard .sd{font-size:12px;color:#9aa1c4;margin-top:7px;line-height:1.55}
+.spotcard:before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#818cf8,#22d3ee);border-radius:18px 18px 0 0;transition:transform .5s}
+.spotcard.on{opacity:1;transform:translateY(-9px) scale(1.06);background:linear-gradient(160deg,rgba(109,94,252,.24),rgba(34,211,238,.13));border-color:rgba(34,211,238,.5);box-shadow:0 28px 64px -22px rgba(34,211,238,.62)}
+.spotcard.on:before{transform:scaleX(1)}
+.spotcard.on .sn{filter:drop-shadow(0 0 14px rgba(34,211,238,.75))}
+.spotcard.on .sd{color:#cfd5ef}
+
+.note{margin-top:30px;font-size:13px;color:#6d7299}
+.note b{color:#a5b4fc}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.spotcard{opacity:1}}
+</style>
+</head>
+<body>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="vign"></div>
+
+<div class="bar"><div class="wrap"><b>SAMPLE · 지표 스포트라이트 (디테일 복원)</b><a href="./" target="_blank"><i class="ti ti-external-link"></i>현재 라이브</a></div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="vlabel"><i class="ti ti-sparkles"></i>새 제안 · 빠진 보조설명 복원 + 스포트라이트 스윕</div>
+    <div class="vnote">파이프라인 중심(C)은 유지하되, 칩으로 줄이며 빠졌던 지표별 보조설명(200억 밸류 · 고객사 · RS 모델 · IR 등)을 카드로 되살리고, 하이라이트가 좌→우로 자동 스윕하며 하나씩 강조합니다.</div>
+    <h1 class="h1">사업과 서비스를 기획하고, 풀스택으로 직접 개발합니다.</h1>
+    <p class="sub">아이디어부터 수익화까지 <b>밸류체인 전 구간을 단독 리드</b> — AI를 레버리지해 멀티앱 SaaS를 1인 개발로 상용 운영합니다.</p>
+
+    <div class="pipe" id="pipe">
+      <div class="pnode on"><span class="pi"><i class="ti ti-bulb"></i></span><span class="pt">아이디어 발굴</span><span class="ps">Discovery</span></div>
+      <div class="parr"><i class="ti ti-chevron-right"></i></div>
+      <div class="pnode"><span class="pi"><i class="ti ti-target-arrow"></i></span><span class="pt">GTM</span><span class="ps">Go-To-Market</span></div>
+      <div class="parr"><i class="ti ti-chevron-right"></i></div>
+      <div class="pnode"><span class="pi"><i class="ti ti-package"></i></span><span class="pt">제품화</span><span class="ps">Build</span></div>
+      <div class="parr"><i class="ti ti-chevron-right"></i></div>
+      <div class="pnode"><span class="pi"><i class="ti ti-settings"></i></span><span class="pt">운영</span><span class="ps">Operate</span></div>
+      <div class="parr"><i class="ti ti-chevron-right"></i></div>
+      <div class="pnode"><span class="pi"><i class="ti ti-trending-up"></i></span><span class="pt">수익화</span><span class="ps">Monetize</span></div>
+    </div>
+
+    <div class="spot-head"><i class="ti ti-award"></i>Track Record</div>
+    <div class="spotcards" id="spotcards">
+      <div class="spotcard on"><span class="sn">4회</span><div class="st">창업 및 엑싯 경험</div><div class="sd">스타트업 대표 · 200억 밸류 경영</div></div>
+      <div class="spotcard"><span class="sn">40여 개</span><div class="st">IT 서비스 출시</div><div class="sd">B2B · B2C · B2G 다산업 리드</div></div>
+      <div class="spotcard"><span class="sn">AI Agent</span><div class="st">상용화</div><div class="sd">대기업 · 금융 · 공공 고객사 확보</div></div>
+      <div class="spotcard"><span class="sn">100여 개</span><div class="st">기업 영업 · 제휴</div><div class="sd">전략적 제휴 · RS 수익 모델 구축</div></div>
+      <div class="spotcard"><span class="sn">VC · 기관</span><div class="st">투자유치</div><div class="sd">IR · 사업계획서 직접 작성</div></div>
+    </div>
+
+    <p class="note">스윕 주기 동안 각 카드의 <b>보조설명</b>이 항상 노출됩니다 (정보 손실 없음 + 역동성).</p>
+  </div>
+</header>
+
+<script>
+(function(){
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cyc(els,ms){if(!els.length||RM)return;var k=0;setInterval(function(){els.forEach(function(s){s.classList.remove('on');});els[k].classList.add('on');k=(k+1)%els.length;},ms);}
+  cyc(document.querySelectorAll('#pipe .pnode'),1200);
+  cyc(document.querySelectorAll('#spotcards .spotcard'),1700);
+})();
+</script>
+</body>
+</html>
