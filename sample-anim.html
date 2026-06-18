@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sample · UI 애니메이션 제안 4방향</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard",system-ui,sans-serif;background:#07070f;color:#e9ebf8;line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px;position:relative;z-index:3}
+
+@keyframes fb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-34px) scale(1.16)}}
+@keyframes fb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-36px,30px) scale(1.12)}}
+@keyframes shimmer{to{background-position:200% center}}
+.aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(95px)}
+.aurora .a1{width:520px;height:520px;top:-120px;left:-70px;background:#6d28d9;opacity:.4;animation:fb 24s ease-in-out infinite}
+.aurora .a2{width:480px;height:480px;top:42%;right:-90px;background:#0e7490;opacity:.4;animation:fb2 27s ease-in-out infinite}
+.aurora .a3{width:460px;height:460px;bottom:-130px;left:30%;background:#be185d;opacity:.3;animation:fb 31s ease-in-out infinite}
+.vign{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 50% -10%,transparent 50%,rgba(0,0,0,.5))}
+
+.bar{position:sticky;top:0;z-index:40;background:rgba(7,7,15,.62);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid rgba(255,255,255,.09)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:54px}
+.bar b{font-size:12px;letter-spacing:.16em;font-weight:700;color:#c7cbff}
+.bar a{font-size:12.5px;color:#a4a9c8;border:1px solid rgba(255,255,255,.09);padding:6px 12px;border-radius:999px;display:inline-flex;gap:6px;align-items:center}
+.bar a i{color:#67e8f9}
+
+.vh{position:relative;border-top:1px solid rgba(255,255,255,.07);padding:64px 0 90px;min-height:78vh}
+.vh:first-of-type{border-top:none}
+.vlabel{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:800;letter-spacing:.08em;color:#0a0a16;background:linear-gradient(135deg,#a5b4fc,#67e8f9);padding:6px 13px;border-radius:999px;margin-bottom:18px}
+.vnote{font-size:12.5px;color:#8b90b4;margin-bottom:34px;max-width:760px}
+.sub2{font-size:15px;color:#aab2da;margin-top:16px}
+
+/* 1 — scroll-driven */
+.sd-h{font-size:clamp(30px,5.2vw,54px);font-weight:800;letter-spacing:-.03em;line-height:1.14;color:#fff}
+.sd-line{display:inline-block}
+.sd-stats{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.sd-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 20px;text-align:center;min-width:130px;flex:1}
+.sd-stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#67e8f9,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sd-stat span{font-size:12px;color:#aeb4d6}
+@keyframes wipeUp{from{opacity:0;transform:translateY(40px);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}
+@keyframes popScroll{from{opacity:0;transform:translateY(34px) scale(.9)}to{opacity:1;transform:none}}
+/* scroll-driven reveal handled in JS (robust across browsers) */
+
+/* 2 — kinetic typography */
+.kt{font-size:clamp(30px,5.6vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1.12;background:linear-gradient(90deg,#fff,#a5b4fc,#67e8f9,#fff);background-size:240% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite}
+.kt-rot{display:inline-flex;flex-direction:column;height:1.12em;overflow:hidden;vertical-align:top;-webkit-text-fill-color:#67e8f9}
+.kt-rot b{font-weight:800;line-height:1.12;animation:ktrot 9s cubic-bezier(.76,0,.24,1) infinite}
+@keyframes ktrot{0%,12%{transform:translateY(0)}16.6%,28%{transform:translateY(-100%)}33.3%,45%{transform:translateY(-200%)}50%,62%{transform:translateY(-300%)}66.6%,78%{transform:translateY(-400%)}83.3%,100%{transform:translateY(-500%)}}
+
+/* 3 — editorial minimal (flat, anti-bling) */
+.as3{background:#0b0b0d;z-index:2}
+.ed{max-width:900px}
+.ed-kick{font-size:12px;letter-spacing:.3em;color:#8a8f9e;font-weight:700}
+.ed-h{margin-top:18px;font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-.035em;line-height:1.08;color:#f4f5f7}
+.ed-rule{height:1px;background:rgba(255,255,255,.14);margin:30px 0 6px}
+.ed-row{display:flex;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);position:relative;transition:padding-left .3s}
+.ed-row em{font-style:normal;font-size:12px;color:#8a8f9e;font-weight:700;min-width:22px}
+.ed-row b{font-size:clamp(17px,2vw,22px);font-weight:600;color:#dfe1e8}
+.ed-row:after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:#7cf3ff;transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.ed-row:hover{padding-left:10px}
+.ed-row:hover:after{width:100%}
+.ed-row:hover b{color:#fff}
+
+/* 4 — 3D depth + magnetic */
+.scene{perspective:1100px;perspective-origin:50% 38%}
+.stage{transform-style:preserve-3d;transition:transform .14s ease-out;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.layer{transform:translateZ(var(--z,0))}
+.d3-h{font-size:clamp(26px,4.6vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.14;color:#fff;text-shadow:0 24px 46px rgba(0,0,0,.55)}
+.d3-cards{margin-top:30px;display:flex;flex-wrap:wrap;gap:13px}
+.d3-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:16px 22px;backdrop-filter:blur(8px);transition:transform .16s ease-out,box-shadow .16s;text-align:center;min-width:120px}
+.d3-card b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#67e8f9,#818cf8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.d3-card span{font-size:12px;color:#aeb4d6}
+.d3-hint{margin-top:18px;font-size:12px;color:#6d7299;display:flex;align-items:center;gap:7px}
+
+@media(max-width:760px){.vh{min-height:0;padding:48px 0 64px}.scene{perspective:none}.stage{transform:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.sd-line,.sd-stat{opacity:1!important}.stage{transform:none!important}}
+</style>
+</head>
+<body>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="vign"></div>
+
+<div class="bar"><div class="wrap"><b>SAMPLE · UI 애니메이션 4방향</b><a href="./" target="_blank"><i class="ti ti-external-link"></i>현재 라이브</a></div></div>
+
+<!-- 1 scroll-driven -->
+<section class="vh as1">
+  <div class="wrap">
+    <div class="vlabel"><i class="ti ti-mouse"></i>스크롤 구동 · Scroll-driven</div>
+    <div class="vnote">스크롤 위치에 반응해 한 줄씩 마스크 와이프로 등장하고, 지표가 스크롤 진행에 맞춰 솟아오른다. (CSS scroll-timeline — 페이드인 토글이 아닌 스크롤 연동)</div>
+    <h1 class="sd-h"><span class="sd-line">사업과 서비스를 기획하고,</span><br><span class="sd-line l2">풀스택으로 직접 개발합니다.</span></h1>
+    <p class="sub2 sd-line l3">아이디어부터 수익화까지 밸류체인 전 구간을 단독 리드 — AI를 레버리지해 1인 개발로 상용 운영.</p>
+    <div class="sd-stats">
+      <div class="sd-stat"><b>4회</b><span>창업 및 엑싯</span></div>
+      <div class="sd-stat"><b>40+</b><span>IT 서비스 출시</span></div>
+      <div class="sd-stat"><b>AI Agent</b><span>상용화</span></div>
+      <div class="sd-stat"><b>100+</b><span>기업 영업 · 제휴</span></div>
+      <div class="sd-stat"><b>VC</b><span>기관 투자유치</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 kinetic typography -->
+<section class="vh as2">
+  <div class="wrap">
+    <div class="vlabel"><i class="ti ti-typography"></i>키네틱 타이포 · Kinetic Type</div>
+    <div class="vnote">대형 타이포가 주인공. 단어 로테이터가 기획→설계→개발→운영→수익화로 흐르고, 제목에 그라데이션 스윕.</div>
+    <h1 class="kt">사업의 전 과정을 직접<br><span class="kt-rot"><b>기획</b><b>설계</b><b>개발</b><b>운영</b><b>수익화</b><b>기획</b></span>합니다.</h1>
+    <p class="sub2">기획 · 풀스택 개발 · AI를 한 사람 안에서 통합합니다.</p>
+  </div>
+</section>
+
+<!-- 3 editorial minimal -->
+<section class="vh as3">
+  <div class="wrap">
+    <div class="vlabel"><i class="ti ti-minus"></i>에디토리얼 미니멀 · Editorial</div>
+    <div class="vnote">장식(파티클·글래스·오로라) 전부 제거 · 플랫. 대형 타이포 + 얇은 룰 + 번호 인덱스. 현재의 반대 미감 — 절제된 마이크로 인터랙션(밑줄 드로우).</div>
+    <div class="ed">
+      <div class="ed-kick">FOUNDER · FULL-STACK · AI</div>
+      <h1 class="ed-h">사업과 서비스를 기획하고,<br>풀스택으로 직접 개발합니다.</h1>
+      <div class="ed-rule"></div>
+      <div class="ed-list">
+        <a class="ed-row"><em>01</em><b>4회 창업 및 엑싯 경험</b></a>
+        <a class="ed-row"><em>02</em><b>40여 개 IT 서비스 출시</b></a>
+        <a class="ed-row"><em>03</em><b>AI Agent 상용화 — 대기업 · 금융 · 공공</b></a>
+        <a class="ed-row"><em>04</em><b>100여 개 기업 영업 · 제휴</b></a>
+        <a class="ed-row"><em>05</em><b>VC · 기관 투자유치</b></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 3D depth + magnetic -->
+<section class="vh as4">
+  <div class="wrap">
+    <div class="vlabel"><i class="ti ti-3d-cube-sphere"></i>3D 입체 · Depth & Magnetic</div>
+    <div class="vnote">마우스에 반응해 장면이 기울고(perspective), 레이어가 깊이를 가진다. 카드는 커서로 끌려오는 마그네틱 호버. (데스크톱에서 마우스 이동)</div>
+    <div class="scene" id="scene">
+      <div class="stage" id="stage">
+        <div class="layer" style="--z:55px"><h1 class="d3-h">사업과 서비스를 기획하고,<br>풀스택으로 직접 개발합니다.</h1></div>
+        <div class="layer d3-cards" style="--z:28px">
+          <div class="d3-card mag"><b>4회</b><span>창업 · 엑싯</span></div>
+          <div class="d3-card mag"><b>40+</b><span>IT 서비스</span></div>
+          <div class="d3-card mag"><b>AI</b><span>Agent 상용화</span></div>
+          <div class="d3-card mag"><b>100+</b><span>기업 제휴</span></div>
+          <div class="d3-card mag"><b>VC</b><span>투자유치</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="d3-hint"><i class="ti ti-pointer"></i>마우스를 올려보세요</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sdEls=document.querySelectorAll('.sd-line,.sd-stat');
+  function scrollReveal(){var vh=window.innerHeight;sdEls.forEach(function(el){var b=el.getBoundingClientRect();var p=(vh*0.92-b.top)/(vh*0.42);p=Math.max(0,Math.min(1,p));el.style.opacity=p;el.style.transform='translateY('+((1-p)*38).toFixed(1)+'px)';el.style.filter=p<1?'blur('+((1-p)*6).toFixed(1)+'px)':'none';});}
+  if(RM){sdEls.forEach(function(el){el.style.opacity=1;el.style.transform='none';el.style.filter='none';});return;}
+  window.addEventListener('scroll',scrollReveal,{passive:true});scrollReveal();
+  var scene=document.getElementById('scene'),stage=document.getElementById('stage');
+  if(scene&&stage&&window.matchMedia('(min-width:761px)').matches){
+    scene.addEventListener('mousemove',function(e){var r=scene.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      stage.style.setProperty('--ry',(px*16).toFixed(2)+'deg');stage.style.setProperty('--rx',(-py*12).toFixed(2)+'deg');});
+    scene.addEventListener('mouseleave',function(){stage.style.setProperty('--ry','0deg');stage.style.setProperty('--rx','0deg');});
+    document.querySelectorAll('.d3-card.mag').forEach(function(c){
+      c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();var x=(e.clientX-r.left-r.width/2)/(r.width/2),y=(e.clientY-r.top-r.height/2)/(r.height/2);
+        c.style.transform='translate('+(x*10).toFixed(1)+'px,'+(y*10).toFixed(1)+'px) translateZ(30px) scale(1.06)';c.style.boxShadow='0 24px 50px -16px rgba(34,211,238,.55)';});
+      c.addEventListener('mouseleave',function(){c.style.transform='';c.style.boxShadow='';});});
+  }
+})();
+</script>
+</body>
+</html>
