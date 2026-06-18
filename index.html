@@ -532,7 +532,6 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
         <div class="torbit"></div>
       </div>
       <div class="tlegend"><span><i class="d o"></i>실행 · 송출</span><span><i class="d i"></i>감지 · 수집</span><span><i class="d l"></i>인지 루프 공전</span></div>
-      <div class="livelog"><div class="livetrack" id="livetrack"></div></div>
     </div></div>
 
     <div class="compare reveal">
@@ -658,9 +657,6 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
   if(track){var html='';for(var r=0;r<2;r++){for(var i2=0;i2<KW.length;i2++){
     html+='<span><i class="ti ti-'+KI[i2%KI.length]+'"></i>'+KW[i2]+'</span><span class="dot"></span>';}}track.innerHTML=html;}
 
-  var EV=[['phone-incoming','미응답 상담 감지 · 자동 콜백 배정',0],['door-enter','출입 이벤트 수신 · 근태 자동 반영',1],['message-2','상담 결과 알림톡 발송 완료',1],['report-analytics','일일 경영 리포트 자동 생성',1],['credit-card','결제 누락 감지 · 담당자 알림',0],['checklist','미처리 업무 자동 에스컬레이션',0],['calendar-event','일정 변경 · 담당자 자동 통지',1],['user-plus','신규 고객 등록 · 상담 배정',1],['shield-check','이상 트래픽 차단 · 보안 정상',1]];
-  var lt=document.getElementById('livetrack');
-  if(lt){var lh='';for(var lr=0;lr<2;lr++){for(var le=0;le<EV.length;le++){var ev=EV[le];lh+='<span><i class="ti ti-'+ev[0]+(ev[2]?' ok':'')+'"></i>'+ev[1]+'</span>';}}lt.innerHTML=lh;}
 
   var typed=document.getElementById('typed');
   var TXT='사업과 서비스를 기획하고, AI를 레버리지해 멀티앱 SaaS를 1인 개발로 상용 운영합니다.';
