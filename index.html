@@ -44,6 +44,11 @@ a{color:inherit;text-decoration:none}
 @keyframes liveBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.65)}50%{opacity:.4;box-shadow:0 0 0 7px rgba(52,211,153,0)}}
 @keyframes statGlow{0%,100%{filter:drop-shadow(0 0 9px rgba(103,232,249,.55))}50%{filter:drop-shadow(0 0 20px rgba(103,232,249,1))}}
 @keyframes popIn{0%{opacity:0;transform:translateY(18px) scale(.95)}100%{opacity:1;transform:none}}
+@keyframes pulseCore{0%,100%{box-shadow:0 0 0 0 rgba(34,211,238,.45),0 0 36px -4px rgba(129,140,248,.7)}50%{box-shadow:0 0 0 12px rgba(34,211,238,0),0 0 54px -2px rgba(34,211,238,.9)}}
+@keyframes nodePulse{0%,100%{border-color:var(--bd);box-shadow:0 8px 26px -16px rgba(0,0,0,.8)}50%{border-color:rgba(129,140,248,.45);box-shadow:0 0 24px -6px rgba(129,140,248,.5)}}
+@keyframes stageGlow{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}6%{opacity:1;box-shadow:0 0 22px rgba(34,211,238,.95);border-color:rgba(34,211,238,.7);transform:translate(-50%,-50%) scale(1.13)}22%{opacity:.5;transform:translate(-50%,-50%) scale(1)}}
+@keyframes coreOrbit{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes driftP{0%{transform:translate(0,0);opacity:0}10%{opacity:.7}90%{opacity:.7}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
 
 .aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .aurora span{position:absolute;border-radius:50%;filter:blur(95px)}
@@ -279,6 +284,50 @@ section{position:relative;overflow:hidden;padding:74px 0;border-top:1px solid rg
 .livetrack span{font-size:12.5px;color:#c6cbe8;display:inline-flex;align-items:center;gap:8px}
 .livetrack i{font-size:15px;color:#67e8f9}.livetrack i.ok{color:#34d399}
 
+/* === box 제거 + AI 운영 토폴로지 === */
+.proj-glow{background:none;animation:none;box-shadow:none;padding:0}
+.proj{background:none;border:none;border-radius:0;padding:0;overflow:visible;animation:none}
+.proj:after{display:none}
+.topo{position:relative;width:100%;max-width:920px;margin:16px auto 0;aspect-ratio:1000/680}
+.topo-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.sp-out{stroke:rgba(103,232,249,.16);stroke-width:1.6;fill:none}
+.sp-in{stroke:rgba(165,180,252,.16);stroke-width:1.6;fill:none}
+.peri{stroke:rgba(255,255,255,.06);stroke-width:1;fill:none}
+.loopring{fill:none;stroke:rgba(129,140,248,.28);stroke-width:1.5;stroke-dasharray:2 8;transform-box:view-box;transform-origin:500px 340px;animation:spin 34s linear infinite reverse}
+.halo{fill:none;stroke:rgba(34,211,238,.5)}
+.pkt-out{fill:#7df0ff;filter:drop-shadow(0 0 5px rgba(103,232,249,.95))}
+.pkt-in{fill:#bcc6ff;filter:drop-shadow(0 0 5px rgba(165,180,252,.95))}
+.opulse{fill:#eafcff;filter:drop-shadow(0 0 9px rgba(34,211,238,1))}
+.otrail{fill:#9beaf6;filter:drop-shadow(0 0 6px rgba(34,211,238,.8))}
+.tnode{position:absolute;transform:translate(-50%,-50%);z-index:4;width:150px;max-width:42vw;display:flex;flex-direction:column;align-items:center;gap:7px;padding:13px 10px;text-align:center;background:rgba(16,18,40,.82);backdrop-filter:blur(8px);border:1px solid var(--bd);border-radius:14px;animation:nodePulse 4s ease-in-out infinite}
+.tnode .ni{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:21px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.tnode.in .ni{background:linear-gradient(135deg,#a855f7,#6366f1)}
+.tnode b{font-size:13px;font-weight:700;color:#eceeff;letter-spacing:-.01em;line-height:1.3}
+.tnode:nth-child(2){animation-delay:.5s}.tnode:nth-child(3){animation-delay:1s}.tnode:nth-child(4){animation-delay:1.5s}.tnode:nth-child(5){animation-delay:2s}.tnode:nth-child(6){animation-delay:2.5s}
+.lchip{position:absolute;transform:translate(-50%,-50%);z-index:5;display:flex;align-items:center;gap:6px;padding:7px 12px;background:rgba(12,14,32,.92);border:1px solid rgba(129,140,248,.32);border-radius:999px;animation:stageGlow 5.5s linear infinite}
+.lchip i{font-size:16px;color:#67e8f9}
+.lchip b{font-size:13px;font-weight:800;color:#fff}
+.tcore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;width:128px;height:128px;border-radius:50%;padding:3px;background:conic-gradient(from var(--a),#818cf8,#22d3ee,#f472b6,#a855f7,#818cf8);animation:rotBorder 6s linear infinite,pulseCore 3s ease-in-out infinite}
+.tcore-in{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 50% 32%,#20224a,#090912);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tcore-in i{font-size:34px;color:#a5f3fc;filter:drop-shadow(0 0 8px rgba(34,211,238,.9))}
+.tcore-in b{font-size:19px;font-weight:900;letter-spacing:.04em;background:linear-gradient(90deg,#fff,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.torbit{position:absolute;left:50%;top:50%;width:172px;height:172px;transform:translate(-50%,-50%);z-index:6;pointer-events:none;animation:coreOrbit 7s linear infinite}
+.torbit:before,.torbit:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#67e8f9;box-shadow:0 0 10px rgba(34,211,238,.95);left:50%;margin-left:-4px}
+.torbit:before{top:-4px}.torbit:after{bottom:-4px;background:#c084fc;box-shadow:0 0 10px rgba(192,132,252,.9)}
+.tparticles{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.tparticles i{position:absolute;width:3px;height:3px;border-radius:50%;background:#8ea2ff;animation:driftP var(--pd,9s) linear infinite var(--pdl,0s)}
+.tlegend{margin-top:16px;display:flex;flex-wrap:wrap;gap:18px;justify-content:center;font-size:12.5px;color:var(--muted)}
+.tlegend span{display:inline-flex;align-items:center;gap:7px}
+.tlegend .d{width:9px;height:9px;border-radius:50%}
+.tlegend .d.o{background:#7df0ff;box-shadow:0 0 8px rgba(103,232,249,.9)}
+.tlegend .d.i{background:#bcc6ff;box-shadow:0 0 8px rgba(165,180,252,.9)}
+.tlegend .d.l{background:#67e8f9;box-shadow:0 0 8px rgba(34,211,238,.9)}
+@media(max-width:600px){.topo{max-width:none;aspect-ratio:1000/780}
+  .tcore{width:92px;height:92px}.tcore-in i{font-size:24px}.tcore-in b{font-size:14px}
+  .torbit{width:122px;height:122px}
+  .tnode{width:104px;padding:9px 7px}.tnode b{font-size:12px}.tnode .ni{width:32px;height:32px;font-size:17px}
+  .lchip{padding:5px 9px}.lchip b{font-size:12px}}
+
 footer{position:relative;overflow:hidden;color:#cdd3e6;padding:84px 0 64px;text-align:center;border-top:1px solid var(--bd);background:rgba(0,0,0,.3)}
 footer .q{font-size:21px;font-weight:500;color:#fff;max-width:720px;margin:0 auto;letter-spacing:-.01em;line-height:1.65}
 footer .cta{margin-top:28px;font-size:14px;letter-spacing:.16em;color:#aab2da;display:inline-flex;align-items:center;gap:10px}
@@ -481,24 +530,14 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
         <div class="stat"><i class="ti ti-git-commit"></i><b data-count="1592">0</b><span>커밋</span></div>
         <div class="stat"><i class="ti ti-clock-bolt"></i><b>1개월</b><span>1인 단독 개발</span></div>
       </div>
-      <div class="lp-title"><i class="ti ti-refresh spinz"></i>AI 운영 루프 · Autonomous Loop</div>
-      <div class="loop" id="loop">
-        <div class="lstep"><span class="li"><i class="ti ti-radar-2"></i></span><div class="ln">감지<em>Sense</em></div><div class="ld">통화 · 문자 · 출입 · 결제 등 현장 신호를 24시간 수집</div></div>
-        <div class="lar"><i class="ti ti-arrow-right"></i></div>
-        <div class="lstep"><span class="li"><i class="ti ti-brain"></i></span><div class="ln">판단<em>Decide</em></div><div class="ld">STT · 분석으로 상황을 해석하고 처리 우선순위 결정</div></div>
-        <div class="lar"><i class="ti ti-arrow-right"></i></div>
-        <div class="lstep"><span class="li"><i class="ti ti-send"></i></span><div class="ln">실행<em>Act</em></div><div class="ld">직원 업무 자동 배정 · 알림톡 · 경영 리포트 발송</div></div>
-        <div class="lar"><i class="ti ti-arrow-right"></i></div>
-        <div class="lstep"><span class="li"><i class="ti ti-checks"></i></span><div class="ln">검증<em>Verify</em></div><div class="ld">완료 추적 · 미처리 자동 에스컬레이션으로 운영 마감</div></div>
+      <div class="lp-title"><i class="ti ti-sitemap"></i>AI 운영 토폴로지 · 실시간 데이터 플로우</div>
+      <div class="topo" id="topo">
+        <svg class="topo-svg" viewBox="0 0 1000 680" id="topoSvg" aria-hidden="true"></svg>
+        <div class="tparticles" id="tparticles"></div>
+        <div class="tcore"><div class="tcore-in"><i class="ti ti-cpu"></i><b>AI</b></div></div>
+        <div class="torbit"></div>
       </div>
-      <div class="lp-title"><i class="ti ti-stack-2"></i>시스템 구성 · 멀티앱 SaaS</div>
-      <div class="systems">
-        <div class="sys"><i class="ti ti-building-skyscraper"></i>본사 통합 관제</div>
-        <div class="sys"><i class="ti ti-clipboard-check"></i>지점 운영 · 근태</div>
-        <div class="sys"><i class="ti ti-users"></i>CRM · 상담</div>
-        <div class="sys"><i class="ti ti-device-mobile"></i>고객 · 직원 모바일</div>
-        <div class="sys"><i class="ti ti-face-id"></i>출입 게이트웨이</div>
-      </div>
+      <div class="tlegend"><span><i class="d o"></i>실행 · 송출</span><span><i class="d i"></i>감지 · 수집</span><span><i class="d l"></i>인지 루프 공전</span></div>
       <div class="lp-title"><i class="ti ti-activity-heartbeat"></i>실시간 운영 로그 · Live Operations</div>
       <div class="livelog"><div class="livetrack" id="livetrack"></div></div>
     </div></div>
@@ -706,5 +745,39 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
 })();
 </script>
 
+<script>
+(function(){
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS='http://www.w3.org/2000/svg',XL='http://www.w3.org/1999/xlink';
+  var CX=500,CY=340,NR=260,LR=125,L=5.5;
+  var topo=document.getElementById('topo'),svg=document.getElementById('topoSvg');
+  if(!topo||!svg)return;
+  function P(a,r){var t=a*Math.PI/180;return{x:CX+r*Math.cos(t),y:CY+r*Math.sin(t)};}
+  function E(t,at){var e=document.createElementNS(NS,t);for(var k in at)e.setAttribute(k,at[k]);return e;}
+  function PC(p){return{l:(p.x/1000*100).toFixed(2)+'%',t:(p.y/680*100).toFixed(2)+'%'};}
+  function PK(id,cls,r,dur,begin){var c=E('circle',{r:r,class:cls});var am=E('animateMotion',{dur:dur,begin:begin,repeatCount:'indefinite',rotate:'auto'});var mp=E('mpath',{});mp.setAttributeNS(XL,'href','#'+id);mp.setAttribute('href','#'+id);am.appendChild(mp);c.appendChild(am);return c;}
+  var NODES=[{a:-90,label:'본사 통합관제',icon:'building-skyscraper',dir:'out'},{a:-30,label:'CRM · 상담',icon:'users',dir:'in'},{a:30,label:'고객 · 직원 모바일',icon:'device-mobile',dir:'out'},{a:90,label:'출입 게이트웨이',icon:'face-id',dir:'in'},{a:150,label:'지점 운영 · 근태',icon:'clipboard-check',dir:'out'},{a:210,label:'결제 · 정산',icon:'credit-card',dir:'in'}];
+  var STAGES=[{a:-90,label:'감지',icon:'radar-2'},{a:0,label:'판단',icon:'brain'},{a:90,label:'실행',icon:'send'},{a:180,label:'검증',icon:'checks'}];
+  var gP=E('g',{}),gK=E('g',{});
+  for(var h=0;h<3;h++){var hc=E('circle',{cx:CX,cy:CY,r:64,class:'halo','stroke-width':1.5});
+    if(!RM){hc.appendChild(E('animate',{attributeName:'r',values:'64;185',dur:'3.4s',begin:(h*1.13)+'s',repeatCount:'indefinite'}));hc.appendChild(E('animate',{attributeName:'opacity',values:'.55;0',dur:'3.4s',begin:(h*1.13)+'s',repeatCount:'indefinite'}));}
+    gP.appendChild(hc);}
+  gP.appendChild(E('circle',{cx:CX,cy:CY,r:LR,class:'loopring'}));
+  gP.appendChild(E('path',{id:'loopPath',d:'M '+CX+','+(CY-LR)+' a '+LR+','+LR+' 0 1,1 0,'+(2*LR)+' a '+LR+','+LR+' 0 1,1 0,'+(-2*LR),fill:'none',stroke:'none'}));
+  var pts=NODES.map(function(n){return P(n.a,NR);});
+  NODES.forEach(function(n,i){var p=pts[i],id='sp'+i;var d=n.dir==='out'?'M '+CX+','+CY+' L '+p.x.toFixed(1)+','+p.y.toFixed(1):'M '+p.x.toFixed(1)+','+p.y.toFixed(1)+' L '+CX+','+CY;
+    gP.appendChild(E('path',{id:id,d:d,class:n.dir==='out'?'sp-out':'sp-in'}));
+    if(!RM){var du=2.6,pc=n.dir==='out'?'pkt-out':'pkt-in';for(var k=0;k<3;k++)gK.appendChild(PK(id,pc,3.4,du+'s',(k*du/3).toFixed(2)+'s'));}});
+  for(var i=0;i<NODES.length;i++){var a=pts[i],b=pts[(i+1)%NODES.length],m=P(NODES[i].a+30,NR+44),pid='pe'+i;
+    gP.appendChild(E('path',{id:pid,d:'M '+a.x.toFixed(1)+','+a.y.toFixed(1)+' Q '+m.x.toFixed(1)+','+m.y.toFixed(1)+' '+b.x.toFixed(1)+','+b.y.toFixed(1),class:'peri'}));
+    if(!RM)gK.appendChild(PK(pid,'otrail',2.6,'3.6s',(i*0.6).toFixed(2)+'s'));}
+  if(!RM){gK.appendChild(PK('loopPath','opulse',5,L+'s','0s'));gK.appendChild(PK('loopPath','otrail',3,L+'s','-0.22s'));gK.appendChild(PK('loopPath','otrail',2.4,L+'s','-0.42s'));}
+  svg.appendChild(gP);svg.appendChild(gK);
+  NODES.forEach(function(n,i){var p=PC(pts[i]),d=document.createElement('div');d.className='tnode '+n.dir;d.style.left=p.l;d.style.top=p.t;d.innerHTML='<span class="ni"><i class="ti ti-'+n.icon+'"></i></span><b>'+n.label+'</b>';topo.appendChild(d);});
+  STAGES.forEach(function(s,i){var p=PC(P(s.a,LR)),d=document.createElement('div');d.className='lchip';d.style.left=p.l;d.style.top=p.t;d.style.animationDelay=(-(L*i/4)).toFixed(2)+'s';d.innerHTML='<i class="ti ti-'+s.icon+'"></i><b>'+s.label+'</b>';topo.appendChild(d);});
+  var tp=document.getElementById('tparticles');
+  if(tp&&!RM){var TPAL=['#8ea2ff','#67e8f9','#c084fc','#34d399'];for(var q=0;q<16;q++){var sp=document.createElement('i');sp.style.left=(Math.random()*100)+'%';sp.style.top=(Math.random()*100)+'%';sp.style.background=TPAL[q%TPAL.length];sp.style.setProperty('--dx',((Math.random()-.5)*120).toFixed(0)+'px');sp.style.setProperty('--dy',((Math.random()-.5)*120).toFixed(0)+'px');sp.style.setProperty('--pd',(6+Math.random()*7).toFixed(1)+'s');sp.style.setProperty('--pdl',(Math.random()*6).toFixed(1)+'s');tp.appendChild(sp);}}
+})();
+</script>
 </body>
 </html>
