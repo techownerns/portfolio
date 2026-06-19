@@ -397,7 +397,6 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
   <div class="scroll-cue">SCROLL<i class="ti ti-chevron-down"></i></div>
 </header>
 
-<div class="ticker"><div class="track" id="track"></div></div>
 
 <section id="leadership">
   <div class="field" data-field="6" data-op=".1"></div>
@@ -625,12 +624,6 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
     for(var k=0;k<oic.length;k++){var oi=document.createElement('i');oi.className='ti ti-'+oic[k];
       oi.style.transform='rotate('+(k*45)+'deg) translateY(-270px)';orbit.appendChild(oi);}}
 
-  var KW=['AI','LLM','Agent','RAG','Vision','STT','TTS','CEO','CPO','CTO','GTM','PO / PM','SaaS','FinTech',
-    'EdTech','AdTech','Enterprise','VC','RS Model','Next.js','React','TypeScript','Kotlin','PostgreSQL','gRPC','GCP','Cloud Run','RLS','IR'];
-  var KI=['brain','rocket','code','cloud','coin','chart-line','bolt','database','shield-lock','cpu'];
-  var track=document.getElementById('track');
-  if(track){var html='';for(var r=0;r<2;r++){for(var i2=0;i2<KW.length;i2++){
-    html+='<span><i class="ti ti-'+KI[i2%KI.length]+'"></i>'+KW[i2]+'</span><span class="dot"></span>';}}track.innerHTML=html;}
 
 
   var typed=document.getElementById('typed');
