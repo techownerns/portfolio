@@ -175,6 +175,8 @@ section{position:relative;overflow:hidden;padding:74px 0;border-top:1px solid rg
 .careers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:900px){.careers{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.careers{grid-template-columns:1fr}}
+.careers3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.careers3{grid-template-columns:1fr;max-width:560px;margin-inline:auto}}
 .ccard{padding:0}
 .ccard .cover{border-radius:18px 18px 0 0}
 .ccard .cbody{padding:18px 20px 20px}
@@ -541,53 +543,35 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
   <div class="field" data-field="7" data-op=".08"></div>
   <div class="wrap">
     <div class="head reveal"><h2>Career & Expertise</h2><p>주요 경력 · 전문 영역</p></div>
-    <div class="careers" data-stagger>
-      <div class="card ccard tilt reveal">
-        <div class="cover" style="--c1:rgba(99,102,241,.65);--c2:rgba(34,211,238,.55)"><span class="cv-tag">ENTERPRISE</span><span class="cv-word">AI</span></div>
-        <div class="cbody"><div class="crole"><i class="ti ti-cpu"></i>AI 스타트업</div>
-        <div class="cdom">Enterprise AI · Corporate Finance (AX / DX)</div>
-        <ul><li>AI 기반 B2B 업무 자동화 솔루션 사업 총괄 — 아키텍처 설계부터 제품화까지</li>
-          <li>엔터프라이즈 AI Agent 2종 상용화 — 대기업 · 금융 · 공공 초기 고객사 확보</li>
-          <li>VC · 기관 투자유치, 글로벌 IT 기업 제휴, 주요 성과 방송 뉴스 소개</li>
-          <li>특허 · 지식재산권 확보, 벤처기업 인증, 정부 R&D 과제 수행</li></ul></div>
-      </div>
-      <div class="card ccard tilt reveal">
-        <div class="cover" style="--c1:rgba(245,158,11,.6);--c2:rgba(16,185,129,.55)"><span class="cv-tag">FIN · EDU · AD</span><span class="cv-word">SERVICE</span></div>
-        <div class="cbody"><div class="crole"><i class="ti ti-apps"></i>FinTech · EdTech · AdTech</div>
-        <div class="cdom">세무 SaaS · 지식공유 · 마케팅 플랫폼</div>
-        <ul><li>소상공인 세무 · 경영관리 SaaS — 수임처 30곳 → 300곳, 통신사 · 카드사 제휴</li>
-          <li>기업형 영상 지식공유 플랫폼 · LMS / CMS · AI 기능 · 클라우드 전환</li>
-          <li>온라인 마케팅 관리 · 쿠키 기반 리타게팅 광고 솔루션 기획</li></ul></div>
-      </div>
-      <div class="card ccard tilt reveal">
-        <div class="cover" style="--c1:rgba(168,85,247,.6);--c2:rgba(99,102,241,.55)"><span class="cv-tag">ENTERPRISE</span><span class="cv-word">SOLUTION</span></div>
-        <div class="cbody"><div class="crole"><i class="ti ti-building-skyscraper"></i>기업 솔루션</div>
-        <div class="cdom">Enterprise Solutions</div>
-        <div class="pills"><span class="pill">ERP</span><span class="pill">CRM</span><span class="pill">CMS</span><span class="pill">HRM</span><span class="pill">LMS</span><span class="pill">회계</span><span class="pill">세무</span><span class="pill">결제 · 정산</span><span class="pill">전자계약</span><span class="pill">전자문서</span></div></div>
-      </div>
+    <div class="careers careers3" data-stagger>
       <div class="card ccard tilt reveal">
         <div class="cover" style="--c1:rgba(56,189,248,.6);--c2:rgba(124,58,237,.55)"><span class="cv-tag">ENTERPRISE</span><span class="cv-word">B2B</span></div>
         <div class="cbody"><div class="crole"><i class="ti ti-building"></i>B2B</div>
-        <div class="cdom">Enterprise · Platform</div>
-        <ul><li>엔터프라이즈 AI · 세무 SaaS · 운영 자동화</li>
-          <li>ERP / CRM 연계 · 전자문서 · 결제 · 정산</li>
+        <div class="cdom">Enterprise AI · Platform · Solution</div>
+        <ul><li>엔터프라이즈 AI 업무 자동화 · AI Agent 2종 상용화 · 대기업 · 금융 고객사 확보</li>
+          <li>VC · 기관 투자유치 · 글로벌 IT 기업 제휴 · 주요 성과 방송 뉴스 소개</li>
+          <li>ERP · CRM · CMS · HRM · 세무 · 회계 · 결제 · 정산 · 전자계약 · 전자문서 솔루션</li>
+          <li>기업형 영상 지식공유 LMS / CMS · 클라우드 전환</li>
           <li>100여 개 기업 영업 · 제휴 · RS 모델</li></ul></div>
       </div>
       <div class="card ccard tilt reveal">
         <div class="cover" style="--c1:rgba(16,185,129,.6);--c2:rgba(56,189,248,.55)"><span class="cv-tag">CONSUMER</span><span class="cv-word">B2C</span></div>
         <div class="cbody"><div class="crole"><i class="ti ti-device-mobile"></i>B2C</div>
-        <div class="cdom">App · Commerce · Community</div>
-        <ul><li>소상공인 경영관리 앱 · 고객 · 직원 모바일 앱</li>
+        <div class="cdom">App · Commerce · Community · FinTech</div>
+        <ul><li>소상공인 세무 · 경영관리 SaaS · 수임처 30곳 → 300곳 · 통신사 · 카드사 제휴</li>
+          <li>경영관리 · 고객 · 직원 모바일 앱</li>
+          <li>온라인 마케팅 관리 · 쿠키 기반 리타게팅 광고</li>
           <li>커머스 서비스 · 오픈마켓 운영</li>
           <li>시니어 프리미엄 커뮤니티 플랫폼</li></ul></div>
       </div>
       <div class="card ccard tilt reveal">
         <div class="cover" style="--c1:rgba(245,158,11,.6);--c2:rgba(239,68,68,.55)"><span class="cv-tag">PUBLIC</span><span class="cv-word">B2G</span></div>
         <div class="cbody"><div class="crole"><i class="ti ti-building-bank"></i>B2G</div>
-        <div class="cdom">Public · Government</div>
+        <div class="cdom">Public · Government · R&amp;D</div>
         <ul><li>공공기관 사업 제안 · RFP 대응</li>
-          <li>정부 R&D 과제 수행</li>
-          <li>데이터바우처 사업 수행</li></ul></div>
+          <li>공공 부문 엔터프라이즈 AI 초기 고객사 확보</li>
+          <li>정부 R&amp;D · 데이터바우처 과제 수행</li>
+          <li>특허 · 지식재산권 확보 · 벤처기업 인증</li></ul></div>
       </div>
     <p class="dom-full reveal"><b>은행 · 통신사 등 대형 기관 연계</b> · On-Premise · SaaS 전 영역 · 복잡한 기업 백엔드 연계 경험</p>
   </div>
