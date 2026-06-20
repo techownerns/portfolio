@@ -265,6 +265,45 @@
   }
   @media (max-width:680px){.hx-link i{transform:rotate(90deg);}}
 }
+
+/* ===== restored hero motions ===== */
+
+/* rotating icon ring (was #orbit) */
+.hx-orbit{position:absolute; left:50%; top:50%; width:600px; height:600px; margin:-300px 0 0 -300px; z-index:0; opacity:.16; animation:hx-spin 48s linear infinite; pointer-events:none;}
+.hx-orbit .hx-ring{position:absolute; inset:0; border:1px solid rgba(255,255,255,0.20); border-radius:50%;}
+.hx-orbit .hx-ring2{inset:84px;}
+.hx-orbit i{position:absolute; left:50%; top:50%; margin:-15px 0 0 -15px; font-size:30px; color:#fff; filter:drop-shadow(0 0 8px rgba(129,140,248,0.8));}
+@keyframes hx-spin{to{transform:rotate(360deg);}}
+
+/* moving spotlight cycling across the 5 pipeline stages (was .vnode.active) */
+.hx-stage.is-active .hx-card{
+  transform:translateY(-6px);
+  border-color:rgba(170,172,255,0.55);
+  background:linear-gradient(160deg,rgba(96,165,250,0.30),rgba(139,92,246,0.22));
+  box-shadow:
+    0 1px 0 0 rgba(255,255,255,0.20) inset,
+    0 24px 54px -20px rgba(59,90,246,0.55),
+    0 0 38px -6px rgba(120,110,255,0.55);
+}
+.hx-stage.is-active .hx-card::after{opacity:.95;}
+.hx-stage.is-active .hx-tile{color:#eef1ff; background:linear-gradient(160deg,#4f9bff,#9b7dff); border-color:rgba(255,255,255,0.26); transform:scale(1.07);}
+.hx-stage.is-active .hx-en{color:#cdd9ff;}
+
+/* scroll cue (was .scroll-cue) */
+.hx-cue{position:absolute; left:50%; bottom:14px; transform:translateX(-50%); z-index:2; color:#aab2da; font-size:12px; letter-spacing:.18em; opacity:0; transition:opacity .7s ease; transition-delay:1s;}
+.hx-hero.is-in .hx-cue{opacity:1;}
+.hx-cue i{display:block; margin:4px auto 0; font-size:20px; animation:hx-floaty 1.5s ease-in-out infinite;}
+@keyframes hx-floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+@media (max-width:680px){.hx-orbit{display:none;}}
+
+@media (prefers-reduced-motion:reduce){
+  .hx-orbit{animation:none !important;}
+  .hx-cue{transition:none !important;}
+  .hx-cue i{animation:none !important;}
+  .hx-stage.is-active .hx-card,
+  .hx-stage.is-active .hx-tile{transition:none !important;}
+}
 </style>
 </head>
 <body>
@@ -273,6 +312,7 @@
     <div class="hx-glow hx-glow--violet"></div>
     <div class="hx-glow hx-glow--blue"></div>
     <canvas class="hx-net" id="hxNet"></canvas>
+    <div class="hx-orbit" id="hxOrbit"><span class="hx-ring"></span><span class="hx-ring hx-ring2"></span></div>
   </div>
 
   <div class="hx-inner">
@@ -335,6 +375,7 @@
       <li class="hx-chip" style="--i:4">VC · 기관 투자유치</li>
     </ul>
   </div>
+  <div class="hx-cue" aria-hidden="true">SCROLL<i class="ti ti-chevron-down"></i></div>
 </section>
 <script>
 (function () {
@@ -446,6 +487,44 @@
     if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }
     else if (!raf) frame();
   });
+})();
+
+(function () {
+  // restored hero motions: rotating icon ring + value-chain spotlight cycle
+  var hero = document.getElementById("hx-hero");
+  if (!hero) return;
+  var reduce = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var orbit = document.getElementById("hxOrbit");
+  if (orbit && !orbit.querySelector("i")) {
+    var icons = ["brain", "rocket", "code", "cloud", "coin", "chart-line", "device-mobile", "shield-lock"];
+    for (var k = 0; k < icons.length; k++) {
+      var ic = document.createElement("i");
+      ic.className = "ti ti-" + icons[k];
+      ic.style.transform = "rotate(" + (k * 45) + "deg) translateY(-270px)";
+      orbit.appendChild(ic);
+    }
+  }
+
+  if (reduce) return;
+
+  var stages = hero.querySelectorAll(".hx-stage");
+  if (stages.length) {
+    var idx = 0, timer = null;
+    function tick() {
+      for (var s = 0; s < stages.length; s++) {
+        stages[s].classList.toggle("is-active", s === idx);
+      }
+      idx = (idx + 1) % stages.length;
+    }
+    function start() { if (!timer) { tick(); timer = setInterval(tick, 1100); } }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    start();
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else start();
+    });
+  }
 })();
 </script>
 </body>
