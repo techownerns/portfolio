@@ -470,10 +470,11 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
 <section id="recent">
   <div class="field" data-field="6" data-op=".09"></div>
   <div class="wrap">
-    <div class="head reveal"><h2>Recent Work · 최근 결과물</h2><p>AI 레버리지가 극대화된 최근 결과물: 프랜차이즈 지점 운영 자동화 AI 운영 에이전트</p></div>
+    <div class="head reveal"><h2>Recent Work · 최근 결과물</h2><p>AI 레버리지가 극대화된 최근 결과물</p></div>
     <div class="proj-glow reveal"><div class="proj">
       <div class="field" data-field="8" data-op=".16"></div>
-      <p class="pdesc" id="pdesc"><span class="tw">AI가 직원에게 업무를 할당하고 검증합니다.</span><span class="twcur"></span></p>
+      <p class="pdesc"><span class="tw">프랜차이즈 지점 운영 자동화 AI 운영 에이전트</span><span class="twcur"></span></p>
+      <p class="pdesc"><span class="tw">AI가 직원에게 업무를 할당하고 검증합니다.</span><span class="twcur"></span></p>
       <div class="stats">
         <div class="stat"><i class="ti ti-database"></i><b data-count="110" data-suffix="+">0</b><span>DB 테이블 · RLS 멀티테넌트</span></div>
         <div class="stat"><i class="ti ti-file-code"></i><b data-count="980" data-suffix="+">0</b><span>소스 파일</span></div>
@@ -681,6 +682,6 @@ footer .cta i{color:#67e8f9;animation:floaty 2s ease-in-out infinite;filter:drop
   if(tp&&!RM){var TPAL=['#8ea2ff','#67e8f9','#c084fc','#34d399'];for(var q=0;q<16;q++){var sp=document.createElement('i');sp.style.left=(Math.random()*100)+'%';sp.style.top=(Math.random()*100)+'%';sp.style.background=TPAL[q%TPAL.length];sp.style.setProperty('--dx',((Math.random()-.5)*120).toFixed(0)+'px');sp.style.setProperty('--dy',((Math.random()-.5)*120).toFixed(0)+'px');sp.style.setProperty('--pd',(6+Math.random()*7).toFixed(1)+'s');sp.style.setProperty('--pdl',(Math.random()*6).toFixed(1)+'s');tp.appendChild(sp);}}
 })();
 </script>
-<script>(function(){var el=document.getElementById('pdesc');if(!el)return;var tw=el.querySelector('.tw');if(!tw)return;var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(RM)return;var full=tw.textContent;tw.textContent='';var done=false;function type(){if(done)return;done=true;var i=0;(function s(){tw.textContent=full.slice(0,i);i++;if(i<=full.length)setTimeout(s,55);})();}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){type();io.disconnect();}});},{threshold:.35});io.observe(el);}else{type();}})();</script>
+<script>(function(){var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;var lines=[].slice.call(document.querySelectorAll('#recent .pdesc'));if(!lines.length)return;var data=lines.map(function(p){var tw=p.querySelector('.tw');return{tw:tw,full:tw?tw.textContent:'',cur:p.querySelector('.twcur')};});if(RM)return;data.forEach(function(d){if(d.tw)d.tw.textContent='';if(d.cur)d.cur.style.display='none';});var started=false;function run(){if(started)return;started=true;var li=0;function typeLine(){if(li>=data.length)return;var d=data[li];if(d.cur)d.cur.style.display='inline-block';var i=0;(function step(){d.tw.textContent=d.full.slice(0,i);i++;if(i<=d.full.length){setTimeout(step,55);}else{if(li<data.length-1&&d.cur)d.cur.style.display='none';li++;setTimeout(typeLine,350);}})();}typeLine();}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run();io.disconnect();}});},{threshold:.3});io.observe(lines[0]);}else{run();}})();</script>
 </body>
 </html>
